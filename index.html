@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>愛飢ゑヲワル</title>
+<style type="text/css">
+
+* { box-sizing: border-box; }
+body {
+	margin: 0 auto;
+	padding: 0;
+	font-size: 0.9rem;
+	color: #666;
+}
+header {
+	margin: 0;
+	background: #fff;
+	width: 100%;
+	position:fixed;
+	border-bottom: 1px solid #999;
+	padding: 6px 0;
+	color: #8A8A8A;
+}
+main { display: flex; margin: 0 auto; }
+#text { width: 1100px; margin: 50px auto 0; }
+footer { margin: 10px; height: 20px; font-size: 0.7rem;  text-align: right;}
+footer a { color: #aaa; text-decoration: none;}
+footer a:hover { color: #999 }
+
+h2 {
+	font-size: 0.9rem;
+	margin: 20px 0 8px 0;
+	border-left: 5px solid #000;
+	padding-left: 10px;
+}
+.nameList h2 { margin-top: 50px; }
+
+input[type=checkbox] {
+	transform: scale(1.3);
+	margin: 10px 8px 10px 3px;
+}
+dl {
+	display: flex;
+	flex-wrap: wrap;
+	border-bottom: 1px solid #e0e0e0;
+	margin: 0;
+}
+dt {
+	width: 18%;
+	padding: 0 10px 0 10px;
+	margin: 5px 0 5px 0;
+	font-size: 0.75rem;
+	text-align: right;
+	display: block;
+	border-right: dotted 1px #888;
+}
+dd {
+	width: 80%;
+	padding: 0 5px 0 10px;
+	margin: 5px 0 5px 0;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+.tab {
+	border-top: 1px solid #e0e0e0;
+	z-index: -1;
+	text-align: right;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding-top: -1px;
+	position: relative;
+}
+.tab span {
+	display: inline-block;
+	border-bottom: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+	background: #f0f0f0;
+	font-size: 0.75rem;
+	color: #666;
+	padding: 2px 6px 0 8px;
+	border-radius: 0 0 0 12px;
+	margin-top: -1px;
+}
+
+/*------------------------------
+ ハンバーガーメニュー        -*/
+
+header .hcenter {
+	max-width: 1200px;
+	display: flex;
+	margin: 0 10px;
+}
+header h1 {
+	order: 2;
+	margin: 5px 0 0 80px;
+	padding-top: 2px;
+	padding-left:10px;
+	border-left: 6px solid;
+	height: 18px;
+	line-height: 1;
+	font-size: 1.1rem;
+}
+.drawer-hidden { display: none; }
+.drawer { order: 1; }
+.drawer-open {
+	display: flex;
+	height: 28px;
+	width: 26px;
+	align-items: center;
+	position: relative;
+	z-index: 100;
+	cursor: pointer;
+	color: #8A8A8A;
+}
+.drawer-open .menusub {
+	padding-left: 32px;
+	padding-top: 2px;
+	font-size: 1rem;
+	font-weight: bold;
+}
+.drawer-open span.menubtn,
+.drawer-open span.menubtn:before,
+.drawer-open span.menubtn:after {
+	content: '';
+	display: block;
+	height: 3px;
+	width: 25px;
+	border-radius: 3px;
+	background: #8A8A8A;
+	transition: 0.5s;
+	position: absolute;
+	margin: 0 0 0 auto;
+	text-align: right;
+}
+
+/* アイコン */
+.drawer-open span.menubtn:before { bottom: 8px;}
+.drawer-open span.menubtn:after { top: 8px;}
+#drawer-check:checked ~ .drawer-open span.menubtn {
+	background: rgba(255, 255, 255, 0);
+}
+#drawer-check:checked ~ .drawer-open span.menubtn::before {
+	bottom: 0;
+	transform: rotate(45deg);
+}
+#drawer-check:checked ~ .drawer-open span.menubtn::after {
+	top: 0;
+	transform: rotate(-45deg);
+}
+
+/* 中身 */
+.drawer-content {
+	width: 280px;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: -280px;
+	z-index: 99;
+	background: rgba(0,0,0,0.75);
+	transition: all .3s;
+	padding-left: 23px;
+	padding-top: 80px;
+	color: #fff;
+	overflow-y: auto;
+}
+#drawer-check:checked ~ .drawer-content {
+	left: 0;
+}
+.drawer-content ul { padding-left:0; }
+.drawer-content ul li { list-style:none; }
+
+
+/*------------------------------
+ 個別設定
+------------------------------*/
+.tc0 { background-color: rgb(232, 232, 232); margin-left: 10%; font-size: 0.8rem}
+.tc1 { background-color: rgb(255, 255, 255)}
+.tc2 { background-color: rgb(223, 221, 233); margin-left: 10%}
+.tc3 { background-color: rgb(226, 246, 255); margin-left: 10%}
+.tc4 { background-color: rgb(223, 221, 233); margin-left: 10%}
+.tc5 { background-color: rgb(229, 251, 237)}
+.tc6 { background-color: rgb(255, 255, 255)}
+.nc0 dt { color: rgb(136, 136, 136) }  /* 赤Seki */
+.nc1 dt { color: rgb(136, 136, 136) }  /* 森陸人 */
+.nc2 dt { color: rgb(136, 136, 136) }  /* 阿衍 */
+.nc3 dt { color: rgb(136, 136, 136) }  /* ■導入 */
+.nc4 dt { color: rgb(136, 136, 136) }  /* ■醒來 */
+.nc5 dt { color: rgb(103, 58, 183) }  /* ＫＰ烏鴉 */
+.nc6 dt { color: rgb(136, 136, 136) }  /* ？ */
+.nc7 dt { color: rgb(136, 136, 136) }  /* 森 陸人 */
+.nc8 dt { color: rgb(255, 255, 255) }  /* ？ */
+.nc9 dt { color: rgb(255, 255, 255) }  /* 淵 */
+.nc10 dt { color: rgb(136, 136, 136) }  /* ■與烏鴉的會面 */
+.nc11 dt { color: rgb(136, 136, 136) }  /* system */
+.nc12 dt { color: rgb(136, 136, 136) }  /* 巨大的烏鴉 */
+.nc13 dt { color: rgb(136, 136, 136) }  /* 小小的烏鴉 */
+.nc14 dt { color: rgb(136, 136, 136) }  /* ■黑暗 */
+.nc15 dt { color: rgb(136, 136, 136) }  /* ■逃走 */
+.nc16 dt { color: rgb(136, 136, 136) }  /* 女性探索者 */
+.nc17 dt { color: rgb(136, 136, 136) }  /* ■ */
+.nc18 dt { color: rgb(136, 136, 136) }  /* ■記憶1 */
+.nc19 dt { color: rgb(136, 136, 136) }  /* □天亮 */
+.nc20 dt { color: rgb(136, 136, 136) }  /* ■魅惑之森 */
+.nc21 dt { color: rgb(136, 136, 136) }  /* □虹湖 */
+.nc22 dt { color: rgb(255, 235, 59) }  /* 塔瑪什 */
+.nc23 dt { color: rgb(136, 136, 136) }  /* 阿 */
+.nc24 dt { color: rgb(136, 136, 136) }  /* □世界的記憶 */
+.nc25 dt { color: rgb(136, 136, 136) }  /* ■記憶2 */
+.nc26 dt { color: rgb(136, 136, 136) }  /* □溺水 */
+.nc27 dt { color: rgb(136, 136, 136) }  /* ■廢屋 */
+.nc28 dt { color: rgb(233, 30, 99) }  /* ??? */
+.nc29 dt { color: rgb(136, 136, 136) }  /* □交界的裂縫 */
+.nc30 dt { color: rgb(136, 136, 136) }  /* ▼ */
+.nc31 dt { color: rgb(136, 136, 136) }  /* 男性探索者 */
+.nc32 dt { color: rgb(136, 136, 136) }  /* ■抉擇 */
+.nc33 dt { color: rgb(136, 136, 136) }  /* □生與死之神 */
+.nc34 dt { color: rgb(63, 81, 181) }  /* 佐·卡拉爾 */
+.nc35 dt { color: rgb(136, 136, 136) }  /* ■尾聲 */
+.nc36 dt { color: rgb(136, 136, 136) }  /* END-A2：以愛為食 */
+.nc37 dt { color: rgb(136, 136, 136) }  /* □甦醒 */
+
+
+.C, .S, .SU, .SP { color: #2196F3; }
+.F, .FA { color: #F50057; }
+
+/*------------------------------
+ レスポンシブ
+------------------------------*/
+@media screen and (max-width:1100px) {
+	#list { display: none; }
+	#text { width: 90%; }
+}
+
+@media screen and (max-width:810px) {
+	body { font-size: 0.85rem; }
+	#list { display: none; }
+	#text { width: 100%; padding: 0 5px; }
+	header h1 { font-size: 1rem; margin-left: 10px; padding-left: 0; border-left: 0; padding-top: 4px; }
+	.drawer-open .menusub { display: none; }
+}
+
+</style>
+</head>
+<body>
+<header>
+	<div class="hcenter">
+		<h1>愛飢ゑヲワル</h1>
+		<div class="drawer">
+			<input type="checkbox" id="drawer-check" class="drawer-hidden">
+			<label for="drawer-check" class="drawer-open">
+				<span class="menusub">MENU</span>
+				<span class="menubtn"></span>
+			</label>
+			<setction class="drawer-content">
+				<form autocomplete="off">
+					<div class="tabList">
+						<h2>タブ</h2>
+						<ul>
+							<li><label><input id=tc0 class="select_t" type="checkbox" checked>雑談</li></label>
+							<li><label><input id=tc1 class="select_t" type="checkbox" checked>メイン</li></label>
+							<li><label><input id=tc2 class="select_t" type="checkbox" checked>秘密(M.W.,阿衍)</li></label>
+							<li><label><input id=tc3 class="select_t" type="checkbox" checked>秘密(M.W.,赤Seki)</li></label>
+							<li><label><input id=tc4 class="select_t" type="checkbox" checked>秘匿(M.W.,阿衍)</li></label>
+							<li><label><input id=tc5 class="select_t" type="checkbox" checked>情報</li></label>
+							<li><label><input id=tc6 class="select_t" type="checkbox" checked>結局</li></label>
+
+						</ul>
+					</div>
+					<div class="nameList">
+						<h2>発言者</h2>
+						<ul>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc0" class="select_n" type="checkbox" checked>赤Seki</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc1" class="select_n" type="checkbox" checked>森陸人</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc2" class="select_n" type="checkbox" checked>阿衍</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc3" class="select_n" type="checkbox" checked>■導入</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc4" class="select_n" type="checkbox" checked>■醒來</li></label>
+							<li style ="color:rgb(103, 58, 183);"><label><input id="nc5" class="select_n" type="checkbox" checked>ＫＰ烏鴉</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc6" class="select_n" type="checkbox" checked>？</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc7" class="select_n" type="checkbox" checked>森 陸人</li></label>
+							<li style ="color:rgb(255, 255, 255);"><label><input id="nc8" class="select_n" type="checkbox" checked>？</li></label>
+							<li style ="color:rgb(255, 255, 255);"><label><input id="nc9" class="select_n" type="checkbox" checked>淵</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc10" class="select_n" type="checkbox" checked>■與烏鴉的會面</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc11" class="select_n" type="checkbox" checked>system</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc12" class="select_n" type="checkbox" checked>巨大的烏鴉</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc13" class="select_n" type="checkbox" checked>小小的烏鴉</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc14" class="select_n" type="checkbox" checked>■黑暗</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc15" class="select_n" type="checkbox" checked>■逃走</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc16" class="select_n" type="checkbox" checked>女性探索者</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc17" class="select_n" type="checkbox" checked>■</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc18" class="select_n" type="checkbox" checked>■記憶1</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc19" class="select_n" type="checkbox" checked>□天亮</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc20" class="select_n" type="checkbox" checked>■魅惑之森</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc21" class="select_n" type="checkbox" checked>□虹湖</li></label>
+							<li style ="color:rgb(255, 235, 59);"><label><input id="nc22" class="select_n" type="checkbox" checked>塔瑪什</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc23" class="select_n" type="checkbox" checked>阿</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc24" class="select_n" type="checkbox" checked>□世界的記憶</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc25" class="select_n" type="checkbox" checked>■記憶2</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc26" class="select_n" type="checkbox" checked>□溺水</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc27" class="select_n" type="checkbox" checked>■廢屋</li></label>
+							<li style ="color:rgb(233, 30, 99);"><label><input id="nc28" class="select_n" type="checkbox" checked>???</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc29" class="select_n" type="checkbox" checked>□交界的裂縫</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc30" class="select_n" type="checkbox" checked>▼</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc31" class="select_n" type="checkbox" checked>男性探索者</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc32" class="select_n" type="checkbox" checked>■抉擇</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc33" class="select_n" type="checkbox" checked>□生與死之神</li></label>
+							<li style ="color:rgb(63, 81, 181);"><label><input id="nc34" class="select_n" type="checkbox" checked>佐·卡拉爾</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc35" class="select_n" type="checkbox" checked>■尾聲</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc36" class="select_n" type="checkbox" checked>END-A2：以愛為食</li></label>
+							<li style ="color:rgb(136, 136, 136);"><label><input id="nc37" class="select_n" type="checkbox" checked>□甦醒</li></label>
+
+						</ul>
+					</div>
+				</form>
+			</section>
+		</div>
+	</div>
+</header>
+
+<main>
+<section id="text">
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>到！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>ㄚ我去個廁所（衝</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>回！</dd></dl>
+	<dl class="tc0 nc1"><dt>森陸人</dt><dd>幹幹幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哇怎麼更新背景了！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹你按到了嗎wwwww</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>ctrl+Z!</dd></dl>
+	<dl class="tc0 nc1"><dt>森陸人</dt><dd>我因為用平板不小心按到ＴＴＴＴＴＴ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒事回來了（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我嚇死嚇大（虛脫</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>放大看帥臉 可以啦（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>？？？先不要誒</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>嗨嗨！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>嗨嗨</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>？？？？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（尖叫</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（也截圖（好</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（超大聲尖叫</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我要截超大一張（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>然後那個因為我現在是用平板我發現我貼不上角色期<br>想求救一下ＴＴＴ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>貼上這裡</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>謝謝烏鴉ＴＴ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>然後最好可以忘記抄大陸人</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（（</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>可惡忘記截圖（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他剛剛不小心把背景換成圖片（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>不</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>wwwwww</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>忘記就好</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（同步發噗</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我沒問題了！（緊張緊張</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>感覺好久沒跑團（冒手汗（？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>XDDDDD</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我也（發抖</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我們手濕濕的握手（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>笑鼠我也沒問題了</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>XDDDDD</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>ＸＤＤ</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc3"><dt>■導入</dt><dd>小小的孩子大聲哭泣著。<br>巨大的存在輕聲問詢著。<br><br>「你遇到了什麼傷心的事情麼？」<br><br>說起來，那孩子回答了什麼呢？<br>但能確定的是，從那時起，小小的愛便開始萌芽。<br></dd></dl>
+	<dl class="tc1 nc4"><dt>■醒來</dt><dd>外頭下著傾盆大雨。<br><br>能聽見水滴落在堅硬的岩石上，又被彈落在地面的聲音從遠處傳來。<br><br>感受著不屬於自己暖意從身旁傳來，你醒了過來。<br>周圍是岩石的牆壁，空氣稍顯沉重，能夠感覺出這裡是某個洞穴。<br><br>環顧四周，你看到了有生物生活的痕跡，可以預想這裡應該是誰的住處吧。<br><br>然而對於淵來說，這已經是司空見慣的風景。<br><br>接著，你們為了確認彼此的模樣而看向了對方。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！</dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc5"><dt>ＫＰ烏鴉</dt><dd>▼給HO探索者的秘密情報<br>昨日，因為你深知的「那個理由」，你造訪了見飢山。但是路途中突然下起了雨，你也因此不慎跌落了山崖。</dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>▼給HO神話生物的秘密情報<br>昨晚，當你在自己住處的周邊散步的時候，發現了一個從山崖上墜落的人類。<br>對人類感興趣的你把人類運回了家，給予他溫暖，然後就睡下了。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>okk</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>阿衍我先Ｒㄇ！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好ＯＫＫＫ！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>謝謝烏鴉！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>抱歉我可能要Ｒ一陣子（太久沒ＲＰ</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>沒問題的！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>這就是個ＲＰ本所以，請盡情</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>（多拉Ａ夢閃亮大眼）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>感謝大人...</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>你慢慢來我也繼續趕（。。。。</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>大笑 好那我就不客氣了（ㄟ</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc6"><dt>？</dt><dd>白色的人類石膏像並沒有雙眼，而是擁有數不盡的羽毛，零零散散地拼湊出三對羽翼，將中心的人像層層覆蓋。<br><br>不知從何而來的視線盯著眼前的人類，而如嬰兒稚嫩的笑聲則從石像的中心傳出，就像是這個物品擁有生命一般，像人類一樣發出高興的聲音，但那好似女性的面孔卻沒有任何動靜，靜而莊嚴地矗立於此，矛盾地搗亂心智。<br><br>「早、安，早安。早安。」緊接著，輕如羽毛的聲嗓這麼說道。聽起來就像仍在牙牙學語的孩童，正在高興地模仿自己學會的詞語，一遍又一遍地重複著。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>寶包．．．．．．．</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>👶</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（哭著早安</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹ㄚ哭著早安</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>不要哭！！！！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>ＷＷＷＷＷＷＷ</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>在睜眼後看到身邊有一座奇異的石像，並且石像還發出了人類一般的聲音和語言。<br>森 陸人請進行一個SanCheck (1/1D8)</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>抱歉了老公.......（</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="FA">CCB&lt;=65 SAN (1D100&lt;=65) ＞ 95 ＞ 失敗</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>？？？？？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>真的要哭了</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我要哭了</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>ＴＴＴＴＴＴＴＴ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>你要骰１喔</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc2"><dt>阿衍</dt><dd>1D8 (1D8) ＞ 4</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>呼</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>喔好 沒事</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>饒過你（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>靠北</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>謝謝原諒？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>&gt;:）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>差點大失敗ㄟ 他快嚇死了</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我暫離一下裝水 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>赫！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>睜眼見到眼前的石像，對於不寸在的視線感到奇異。<br>襯衫下的皮膚因石像而激起一陣疙瘩，這輕柔嗓音更帶來一陣頭暈目眩，下意識晃動脹痛的頭腦後，即便因為震驚又亦或是摔下山谷的後遺症而感受到不適，森陸人依舊試圖回視。<br>「⋯⋯早、」遲疑片刻還是做出了回應。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>賀！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>歡回</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>歡回！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>陸人可愛 ( 摸一把</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>‘她才不會嚇死！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>ㄋㄚˋㄊㄚˉㄋㄠˇㄆㄛˊ！！！！（ㄍˉ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>那他腦婆 ㄍ  打字選字怎跳掉</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹 你的輸入法ＳＣ大失敗</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好好笑www</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>其實是我嚇死辣</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>是我的鍋</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>ＴＴ（ㄍ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>那你要負責讓他大成功！（</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我今年好像太歲側沖</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>可能先想想我會幾次大失敗好ㄌ （ㄍ？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹</dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>▽在這裡與[HO探索者]的對答（可以參考）<br><br>‧　這裡是哪裡？<br>→這裡是自己的住處，也是和我相同的生物生活的場所。更多的就不知道了。<br><br>‧　什麼是和你相同的生物？<br>→不是人類的生物。<br><br>‧　知道回去的方法嗎？<br>→因為並不知道森 陸人來到這裡的方法，自然也就不知道如何回去。<br><br>‧　有知道回去的方法的人嗎？<br>→不清楚。<br></dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>喔喔！大感謝！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc8"><dt>？</dt><dd>嬰孩的笑聲再度迴蕩在洞穴中。這具石像以肉眼可見的速度，緩慢地將頭向左傾，看起來就像是普通的生物一樣，正在觀察眼前的人。<br><br>「它、是淵。尼、你，呢？」</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>不太能理解現在的狀況但姑且感受到目前的石像並沒有惡意。但即便如此也不敢輕易放鬆，森陸人緩慢地站起身，感受到視線觀察著自己，而相對的森陸人也是。<br><br>「⋯⋯淵？」沒有回答對方的問題而是選擇了對石膏像的主詞感到疑惑。<br>「是你？不是它。」在奇怪的地方介意</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>糾正超可愛</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>不乖乖回應</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「尼、你？它？」石像又歪向了另一邊，雞同鴨講地重複這幾個單字。即使眼前的人已經站起身子，它巨大的身軀仍維持低垂著頭的姿勢。<br><br>「你的、命子，名字。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>寶寶 可愛 嘻嘻嘻</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（癲</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>咕咕嘎嘎（？？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「⋯⋯陸人、森陸人。」看著石像一直換著方向，不合邏輯的材質讓森陸人不是很能接受但無法，略帶無奈但還是回應了石像並提出疑問。<br>「這裡是哪裡？」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>等等按到</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好了！我暫離一下去廁所</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>okk</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>kk</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「陸、陸⋯⋯陸人，森陸人。」道出的語句之間參雜著喜悅，它高興且一字不差地重複剛剛得知的名字，覆在其身上的羽翼也細微的晃動著，就像微風吹過他的羽毛之間，輕輕地搖擺起舞。<br><br>「這裡，它的家。淵的家。」<br><br>「淵好、好冷，但陸人，很溫暖。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我也去個廁所！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>kk</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>回！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>歡回 !</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>對淵所言感到不解，「會冷？」<br>似乎是模仿著眼前的石像，頭也歪向一邊去。<br>許是被石像嬰孩的聲音宣染，略帶著不可控的焦慮用腳尖摩挲地上的石子，遲疑片刻森陸人將側背包裡的外套拿出來試圖包裹（掛？）在淵的身上後又往後退。<br><br>「這樣，好點。」略微板著臉。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>歡回！！（慢<br></dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我愛他（好</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我也愛淵（好</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>🥰</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好可愛內</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>超口愛.....</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>超好笑他只是不懂為什麼淵會冷但他說了冷<br>只好你說的都對⋯⋯不可愛（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>寶寶才口愛⋯⋯</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他最可愛&gt;：（</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>＞：Ｏ 寶寶最可愛</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>即使臉部表情依舊沒有變化，這名嬰孩仍高興地笑了，連帶羽翼也啪沙啪沙地作響，讓披在上頭的外套穩固地嵌進縫隙之中。接著，它緩緩地向前移動，更加靠近眼前的人。<br><br>「它很、溫暖，謝謝。」<br><br>「淵也要，給尼、給你禮物。」它緩緩將一邊翅膀伸展開來，試圖湊向陸人的掌心。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>ＴＴ（揉捏寶寶（<br>我也想要禮物⋯⋯</dd></dl>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>（給你禮物（？）</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「⋯⋯」<br>啪沙作響的聲音和逐漸靠近的淵都讓森陸人無法言喻地帶著警戒，但那些警戒中就因為披著自己外套略帶滑稽的畫面和意外和平的相處而些許沖淡。<br>連帶地連試圖湊向自己手心的羽翼都不這麼排斥，謹慎地，伸出手獻出自己的掌心。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>(把手掌吃掉)(恐怖)</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（開心笑咪咪）<br></dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>？？？？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>？？？？？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹 畫風突變</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊啊啊啊</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>(最大神話生物結果是KP)</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>再見了陸人</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>就說不要相信神話生物（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我要ＳＣ了</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>WWWWWWWWWWW</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我準備播驚悚BGM (沒有)</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹ㄚwwwww</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>這裡最恐怖的是KP（ㄍ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>播大白鯊（？？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>播奪魂鋸 (???</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>跑團結束</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>十三號星期五</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（？？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹 不可以結束</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我們才正要開始ㄋ！（？？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>超好笑</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>開始美食秀ㄇ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（靠邀</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>怎麼變漢尼拔</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>第一天究竟能不能進第一個劇情ㄋ (燈愣</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>登愣</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>登登！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我可以做一點大逆不道發言嗎</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>請</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（？）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>蝦密！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我剛剛仔細看了你們ㄉ立繪</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>跌倒在淵面前的陸人</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>這個體型差</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>黑</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>陸人好小隻好色喔 (幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我放的時候有故意（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>烏鴉懂我！！！！！！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>不是啊就</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>當石膏質感的羽翼觸及陸人的掌心，那與人類肌膚幾乎無異的觸感與溫度也浸染其上。隨後，在一陣沙沙聲下，一根柔軟的羽毛輕輕地落在男子的手中，依稀還可看見尾端散有零星的幾點血光，就像是剛被人強硬拔除一樣。<br><br>「禮物、禮物。送給陸人。」它這麼說著。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>體型差很讚欸</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我🙏😇（？？）</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>🥺</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>阿衍好棒</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>🥺🥺🥺</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我要一生追隨您</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>就好喜歡</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>必須的 讚的</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>魔鬼一生永相隨🥺🥺🥺</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>🙏😇</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>婚禮也請叫上我</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>🥺</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我期待他們風光大婚</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹我要死了</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>已經老夫老妻（擅自）</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>羽毛上怎麼可以有血光</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>ＴＯＴＴ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>&gt;&lt;</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>🥺</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>他們大概乒乒乓乓幾百回ㄌ （靠？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好好笑</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好喜</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>可以先乓後婚沒問題啊</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>(說甚麼</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我要看 畫面呢（敲碗（幹</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>真的不考慮哪天印個等身立牌去教堂辦婚禮嗎</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>(???</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹啊</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我們可能會被趕出來（ㄟ</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>不會啦你看那些婚禮ONLY場都(</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹虛擬婚禮</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>其他團員還可以伴娘伴郎出場欸</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹好讚ㄛ</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我也可以跨團友誼參加的吧 (???</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>跟另一時空的鬼鬼擊掌（？？？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>全員婚禮趴樓</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>(鬼鬼擊掌</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹不是 太讚了吧 好好玩的感覺</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>484</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>想到之前買的永生花壓克力 真的好適合塞結婚立牌（還沒畫完ry</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>齁</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>之前還有出婚宴場景立牌</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>你們需要了</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>🥺</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>太讚了吧</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>辦ONLY場（沒有</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好想收到他們的喜帖喔.........(幹</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>可以租個小空間自己辦.....</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>參加的親友要帶腳色面具</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>穿小洋裝西裝</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>天ㄚ好讚ㄛ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>還要準備結婚蛋糕（？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>然後放立牌（還是要畫立牌</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>(我的鬼瞬間長高20公分)(幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹幹大笑wwwww</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>立牌一定要的......</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>那我的鬼會瞬間變矮30公分（幹啊</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>貓貓cos老父親證婚(???</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>貓貓wwwwwww</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好可愛我們的鬼鬼.......</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>喝到放大縮小藥水......</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>愚人節又有新梗了！（不對</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>WWWWWWW</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>想到印一團婚禮paro的團員立牌在婚宴桌上就好可愛......</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>Q版也好可愛.....</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>(變成cafe了</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>講到Cafe超有畫面ㄉ...（多拉睜大眼）超級可愛...</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（於是突然之間要出全員周邊（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>看到了些微血光，眉頭微微一皺又恢復原本原先的樣貌。<br>「⋯⋯謝謝、會痛？」這次總算沒有後退維持著他和淵之間的距離。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹我要看縮小凜耶</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好想看ＣＡＦＥ。。。。。</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>有夠可愛欸發瘋</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>484........</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「⋯⋯通、會痛痛。」聽見陸人這麼說，那稚嫩的聲嗓隨即低落而下，就像是剛跌一跤的小孩急著想找人安慰。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>加入有生之年清單....（救命</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>www</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「⋯⋯那不要這樣做。」思考後還是收起對方給予自己的『禮物』，接著像是想到了什麼表情頓住。<br>「不做自己會痛的事。」告誡著對方手還是主動伸向了羽翼似乎在安撫對方，表情略有所思。<br>「那淵，會治療嗎？」</dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc7"><dt>森 陸人</dt><dd>想試探著，眼前的神話生物會不會知道些什麼。<br>或許，他會有關於咒文相關的線索。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我要準備來睡了 ! 你們慢慢RP !</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>如果明天可以進下一個階段我會先貼 !</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>正當它因為陸人略顯嚴肅的語氣，而發出抗議一般的細小低吟時，重新覆上的溫度輕易讓它停止了聲響。它轉而用柔軟的羽毛摩挲回去，就像是正嘗試握住陸人的手。<br><br>「呼呼，痛痛、痛痛就不見了。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>喔喔好！烏鴉晚安！！<br>感覺還要一小段（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！烏鴉晚安！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>晚安晚安 !</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（被可愛到（</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>呼呼ＴＴ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>咕咕嘎嘎（好</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>嘎嘎咕咕</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>沒做過這種事也沒經歷過這種事讓森陸人停頓許久，連思緒都因此暫停。<br>怎麼做都不知道只能遲疑、僵硬地拍拍淵摩挲自己的羽毛。<br>「⋯⋯痛痛不見。」<br>語後像是尷尬一般的退了幾步開始掃視自己所在的洞穴。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好可愛.........</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>我不會。。。。</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>男人做不出呼呼</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他做到了 我大摸一把（ㄟ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我大笑</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>阿我可能也差不多要先退ＤＣ大概最晚十二點半可能也要先睡</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒問題！我回完這一段感覺也差不多哩</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>賀！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>嬰孩滿足地笑了，留在空洞上的艷紅也幾乎是瞬間消失，隨即生長出新的白色羽翼填滿了它。無數根羽毛興高采烈地相互摩擦，在洞穴內形成一道又一道的回音，它緊跟著向後退離的陸人，黏得緊緊的。<br><br>「不痛了、不痛了。謝謝尼。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>嗚呼</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（？？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>長出來ㄌ！（？）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>＆感覺也可以下一階段ㄌ！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我也覺得</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>摸摸長出來地方（？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>那我也要把陸人包起來大摸一把（？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>這邊也先下ㄌ 晚安～</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>笑鼠包起來好可愛（ＴＴＴ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>晚安～～～</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>洞穴的內部單調的可以，要說得上佈置的大概只有昨日休息的位置上鋪了點乾燥的落葉這種等級了。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>兩人皆可＜聆聽＞</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="FA">CCB&lt;=65 &lt;聆聽&gt; (1D100&lt;=65) ＞ 88 ＞ 失敗</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>CCB&lt;=55 &lt;聆聽&gt; (1D100&lt;=55) ＞ 4 ＞ 決定性的成功/特殊</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>你們聊了一會兒，不知何時外面傳來的雨聲聽了。取而代之的是烏鴉沒完沒了地迴響著的叫聲。<br><br><br>&lt;森 陸人 大成功保留&gt;</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>還沒緩解對他來說過於親密的行為就被淵隨即的貼近感到無奈和不解。<br>但因為沒有多少惡感，只是些微退了半步維持似乎什麼奇妙的距離。<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>按到拍謝，等我一下</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>okk</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好了！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>賀！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>而它自顧自地纏著眼前的人類，近乎於壓迫的注意力都放在對方身上，連外面的雨聲是何時停止都未能留意。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>那我繼續囉 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>或許是被外頭的狀況吸引，隨著森 陸人的腳步，你們一起移動到洞穴之外。</dd></dl>
+	<dl class="tc1 nc10"><dt>■與烏鴉的會面</dt><dd>你們從洞穴中走了出來。天空有些陰沉，雨雲漸漸地遠去。<br>在雲之下，從來沒見過的龐大數量的烏鴉如同漩渦一般盤旋著飛翔，好像在對話一樣，哇哇地叫著。<br><br>但是，更加引人注目的是天空的顏色。<br><br>桃色的天空，層雲閃耀著橙黃的光輝。無論是對於森 陸人還是淵來說，都令人毛骨悚然。<br><br>不過，烏鴉倒是普通的漆黑。<br><br><br>這裡並不是你們所知道的世界。&lt;sanc1/1d3&gt;</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哇是烏鴉！（？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>對喔是我 (??</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我也要SC嗎（？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>對喔 ! 因為對你來說這樣的光景也是前所未見的</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="FA">CCB&lt;=70 SAN (1D100&lt;=70) ＞ 80 ＞ 失敗</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>1d3 (1D3) ＞ 1</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="FA">CCB&lt;=61 SAN (1D100&lt;=61) ＞ 82 ＞ 失敗</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>1D3 (1D3) ＞ 3</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>嗚呼</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>!!</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊啊啊嚇到了</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>嚇鼠</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc11"><dt>system</dt><dd>[ 森 陸人 ] SAN : 61 → 58</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>嚇爛</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>那我等你RPㄇ！</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>好</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>『為什麼人類會出現在這裡？』<br><br>一個聲音將你們的視線從空中轉移開了。站在你們面前的是一隻巨大的烏鴉，它的身體甚至超過了4米。烏鴉漆黑而深沉的黑色眼瞳正盯著你們。<br><br><br>看到了現實中不可能存在的生物的森 陸人 &lt;sanc0/1&gt;</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>還加碼</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>嗚呼</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊啊啊啊</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>想說一起(</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>CCB&lt;=58 SAN (1D100&lt;=58) ＞ 8 ＞ 特殊</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>還好還好</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>你一起RP完我再繼續 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>那感覺可以我先Ｒ（？</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>好哇</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好ㄟ！（有想做的動作</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>就當我還在嚇鼠</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>等等烏鴉好大隻wwwwww</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>他超大隻的</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>嘿嘿嘿好期待</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>幹有夠大</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>赤如果要動作的話可以小R一下，後面還有一小段</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我要笑爛</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>可以等等貼完一起慢慢RP !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>喔喔好！那我做個小動作</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>豪 !</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>那我也</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>發現外面的景色不是一如往常的光景，淵微微一愣，將注意力擺在那片漆黑之中，隨即伸展翅膀，將純白的羽毛輕輕地搭到陸人的臂膀上。那溫度就像是在保護他，又隱隱透露出擔憂。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我去速速拿個晚餐！（晚</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>看到了完全意料之外的生物和場景，被巨大而漆黑的雙眼緊緊盯著，而一瞬的腦袋空白身體也不自然的僵直，雖然隱隱感覺到肩上的熱度卻無法反應也似沒有察覺。<br><br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>88！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我接下來會收一下店等等可能回到家才會回！！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好 ! 路上小心 !!</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『而你，又為什麼和人類在一起？』巨大的烏鴉看向淵，這麼質問道。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>烏鴉這麼問著，卻沒有要聽你們的回答的意思。<br>它應該是打心底裡認為人類和非人類在一起是很不可思議的事情吧。<br>這隻烏鴉在詢問的，是連你們自己也不清楚的答案。你們兩人或許也會覺得很不可思議吧。</dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc5"><dt>ＫＰ烏鴉</dt><dd>▼給HO探索者的秘密情報<br>這麼說來，無論何種理由，和這樣的異形一起行動確實不是一件常見的事情。一想到至今遭遇的怪異事件，你馬上就想從這裡逃走，但是不可思議的是，你對淵的厭惡感並未在心中沸騰。<br>不如說，你對他有著近乎善意的感情。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>回！＆豪沒問題！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>赤可以R了 ! 那我衝去洗個戰鬥澡再回來 (欸</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>它沉默片刻，邊思考這個問題有沒有回答的必要，邊將羽翼層層覆蓋到了陸人身上，試圖將人攬到自己懷中。<br><br>「⋯⋯自有它的理由，與你無關。」淵的語氣顯而易見地變得冰冷、嚴峻，毫無在洞穴裡展現的生怯與單純，字句在保持人類嬰孩的聲嗓下，聽起來也有種說不上來的詭異。但又或許這才是它原本的面貌也說不定。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>回 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>歡回！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>微微皺眉，回過神才察覺到自己似乎被羽翼圍繞著，些微的暖意讓他恢復鎮靜。<br>對於淵的回應認同所以並沒有回應僅是淡淡的頜首，對淵與洞穴內的語調差異無感，似是覺得沒什麼大不了。<br>「你是什麼？」反而提出了疑問。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>回家前先回一下！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『看不出來嗎？我就只是隻烏鴉。』巨大的烏鴉蠻不在乎的回答。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>就在你們說話的時候，頭頂上烏鴉們的鳴叫聲更加強烈，仿佛在警告你們一般在周圍迴響。不知道在說什麼，一隻小小的烏鴉站在大烏鴉的肩上拼命地叫著。</dd></dl>
+	<dl class="tc1 nc13"><dt>小小的烏鴉</dt><dd>『嘎嘎──嘎──』</dd></dl>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『嗯……看來，你把不好的東西帶來了啊。』<br>這麼說著，大烏鴉看向森 陸人。</dd></dl>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『這裡是洛本大人守護著的空間。本來，這是與夢幻境沒有直接接觸的大陸，但現在似乎別無選擇。』</dd></dl>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『你們繼續留在這裡會很危險。』</dd></dl>
+	<dl class="tc1 nc14"><dt>■黑暗</dt><dd>烏鴉這麼說著，展開了羽毛。<br>他那巨大的翅膀將你們兩個完全包圍了。<br><br>一瞬間，視野中染上了漆黑。<br><br>隨著刺耳的沙沙聲，黑暗逐漸侵蝕。<br>就這樣，所見的一切都染上了黑暗。<br><br>……<br><br>過了很久。<br>你們努力眨著眼睛，但是無論重複多少次，視野都是黑色的，沒有任何甚至是反射來的光、周遭也聽不見任何聲音。<br><br>不過，你們卻能清楚看到彼此。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>？！？！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>一樣可以小回應後會有一段劇情！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>！！好！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我突然變全場最亮（？？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>你超亮ＸＤ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>閃閃發光（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>直接告訴大家我們的位置（不對</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>突如其來的變化讓它釘直了身子，等待許久才悄悄伸展自己的一邊翅膀從側摸索，試圖得知周圍的環境。同時，它也注意到陸人並沒有離去，方才冷淡的語氣瞬間又佈滿了憂心。<br><br>「陸人、還好嗎⋯⋯？」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（看到他們移動位置了（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……沒事、」被突如的黑暗包覆，身旁只有在黑暗中顯得閃閃發光的淵，雖然緊張，但似乎有他的存在讓森陸人稍微冷靜一些。<br>回應地撫摸淵的羽毛。<br>「沒事。」稍稍掃視自己的身體和周遭這次更帶點肯定但心底介意著剛剛烏鴉所說的。<br>森陸人拿出手機的手電筒掃視四週。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>靠腰拍謝我手指太粗移到</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我到家了！！！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>大笑</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>歡回！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（默默移回去（欸</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（順便讓他們偷偷貼一下（嗯？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>謝謝 我爽了（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>不客氣（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（突然發現自己漏看烏鴉回應。）陸人我修改一下回應好了</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>然而即使是用手電筒照射，也只能看見周遭的地面漆黑一片，彷彿這個空間本來就不存在任何事物。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>ㄚ好像不用改！（看到烏鴉送出（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『對了，你們聽聽說過嗎？這座山中有妖怪出沒這件事。』<br>不知從哪裡傳來了巨大烏鴉向你們搭話的聲音。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>對wwwww</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我們被吃掉了！！！！（沒有</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>可以回答他ｗ</dd></dl>
+	<dl class="tc0 nc12"><dt>巨大的烏鴉</dt><dd>歡迎來到我的肚子裡</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>oO(原來妖怪不是你們兩位嗎）（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊啊啊啊啊</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>阿阿阿阿阿阿啊</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>烏鴉：我是烏鴉！（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>超巨型，不是妖怪，烏鴉（幹</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>超好笑wwww</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「⋯⋯？你在哪裡？」抬頭往上看向一片漆黑，比起妖怪的話題，似乎更在意自己身在何處。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「聽過。」<br>……不是你們嗎。<br>略微挑著眉沒有說話，但顯然不相信原本烏鴉所說的他就是烏鴉的話也對於淵的奇特抱持疑問，但奇特的善意讓他也無法抱持惡感。<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>兩個妖怪沒有自知之明超好笑（ㄍ</dd></dl>
+	<dl class="tc0 nc12"><dt>巨大的烏鴉</dt><dd>呱</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>然而烏鴉似乎沒打算回答淵的問題，繼續講了下去：<br><br>『據說那個妖怪有著——被多對羽翼覆蓋的白色樣貌。』</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>咕咕嘎嘎</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『傳說那個妖怪現在也住在山中，遠遠地注視著人類。』</dd></dl>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『因為目擊情報也很多，所以見飢山也作為神秘、恐怖景點被一部分人所熟知，到此來訪的人類絡繹不絕。』</dd></dl>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『關於這個故事，你們不覺得多少有些耳熟麼？』</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>妖怪們好。</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>被忽視了提問，淵也沒有繼續追問下去，而是靜靜思考烏鴉口中的存在。「『妖怪』⋯⋯」似乎是認知到自己正是故事裡的主角，它略微平淡地重複著這個名詞，「那也是它的名字。」<br><br>「陸人，也是來找『妖怪』的嗎？」它低下頭，向男子詢問道。</dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc5"><dt>ＫＰ烏鴉</dt><dd>因為你是因為想調查魔導書相關的線索而來到這座山，可以知道這個傳言。</dd></dl>
+	<p class="tc4 tab"><span>秘匿(M.W.,阿衍)</span></p>
+	<dl class="tc4 nc2"><dt>阿衍</dt><dd>知道傳言是指包含妖怪的摸樣嗎：0</dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc5"><dt>ＫＰ烏鴉</dt><dd>阿，可以，那我修改一下對淵的敘述，應該會更模糊一點</dd></dl>
+	<p class="tc4 tab"><span>秘匿(M.W.,阿衍)</span></p>
+	<dl class="tc4 nc2"><dt>阿衍</dt><dd>好！！謝謝烏鴉〈3</dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc5"><dt>ＫＰ烏鴉</dt><dd>如果你想自訂聽到的敘述也可以</dd></dl>
+	<p class="tc4 tab"><span>秘匿(M.W.,阿衍)</span></p>
+	<dl class="tc4 nc2"><dt>阿衍</dt><dd>沒有我只是想確認一下🥺🥺🥺</dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc5"><dt>ＫＰ烏鴉</dt><dd>ＯＫＫ</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>對著烏鴉的話，不是很意外，似乎早有所聞。<br>對於淵的疑問沒有迴避也是森陸人心裡的回答。<br>。<br>「我是來找線索的，為了家人。」<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>這邊我可以繼續問嗎！（？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>如果試問陸人的話ＯＫ喔！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好ㄟ！</dd></dl>
+	<p class="tc4 tab"><span>秘匿(M.W.,阿衍)</span></p>
+	<dl class="tc4 nc7"><dt>森 陸人</dt><dd>……雖然多少意識到淵就是自己找的存在，但與自己所想的截然不同，不是說樣貌而是關於他存在給自己所帶來的感受。<br>安穩、親密、……與他經歷過的相比差距甚遠。<br>沒有說謊，找到淵是他的過程，但線索才是他的目的。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我先去刷個牙，睡前有進展的話我就再貼後續！</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>我先速速洗澡！</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>好’</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>謝謝烏鴉🤲</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「線索？」<br><br>「那不是淵的名字。」他歪了歪頭，對於陸人來到山上的理由感到好奇。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>okk！感謝感謝</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc2"><dt>阿衍</dt><dd></dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「嗯，不是你的名字。」<br>「我想找到能復活家人魔法書的線索。」森陸人老實的說著。</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「復活，很好。淵，也要幫忙。它要幫陸人一起找。」它身上的羽翼輕輕地搖動，隱隱展現出它的熱情，似乎對於人類的生死抱有極大的興趣。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>聽到淵正面的回應森陸人眉目帶著溫和，知道淵願意幫忙壓在心底的重也變輕許多「嗯。」<br><br>解決了目前的問題，回想到烏鴉所說的不好的東西和烏鴉刻意提起的傳說。<br>「我也是為此而來。」回應著烏鴉。<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>那我等明天烏鴉回回！晚ㄤ～～</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>來報到！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>到！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>嗨嗨！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>阿本嗨〉：）</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>烏鴉似乎是對這樣的答案不以為意的從鼻孔噴了口氣般的發出了短促的氣音。<br><br>『啊啊，就是如此。這個傳言在人類之間被廣泛流傳了，所以會有人來調查也是沒辦法的事吧。』</dd></dl>
+	<dl class="tc1 nc12"><dt>巨大的烏鴉</dt><dd>『然而這並不是一件有趣的事情。淵，如果你真的關心你身邊的人類的話，你應該認真判斷怎樣做才是正確的。』</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>漆黑的烏鴉的身影隱沒在比黑夜還要更加深沉的黑暗中，你們看不見對方所處的位置，只能聽見從四面八方傳來的聲音。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>被罵ㄌ...(??</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>欸有人挑撥離間！！（欸</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我們在語音 ! 有興趣可以來 !</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>喔喔喔好！我可能要等一下 剛好我家有點吵（</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我等等進去誒</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>沒事www</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>這邊可以RP !</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>賀！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！（正要問（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>阿本要先咪（？）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒問題（速速</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>賀</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「淵，想要人類活著。沒有不對。」它微微晃動翅膀說道，看起來就像是與黑暗爭論，也聽出對方似乎知道關於「線索」的事情。<br><br>「你知道那本書。在哪裡？」</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>靜靜聽著烏鴉說的話微微皺眉但暫且沒有插嘴兩人而是聽著他們對話。<br></dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>然而自顧自說完那些話之後，無論你們再怎麼追問，烏鴉都再也沒有回應。<br>就像這個世界裡只剩下你們兩人一樣。</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>見烏鴉不打算告訴自己，淵發出抗議一般的悶吟，就像是小孩鬧脾氣一樣，對黑暗輕聲罵道，「烏鴉壞、壞烏鴉。」<br><br>接著，它將頭緩慢地轉回來，對向陸人的位置。「陸人，一定愛家人，所以要復活，對不對？他們、怎麼了？」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>有種我被罵的感覺 (??</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>&gt;&lt;</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我打烏鴉也是一直覺得怪怪（欸</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>wwww撞名太尷尬ㄌ！（？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>超好笑ww</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>沒事 算是一種玩梗所以我其實也樂在其中(</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>你還可以瞬間長高到四公尺 很讚ㄟ（？？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我還可以瞬間影分身變成一團(??</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「嗯。」想到老院長的離世，即便過去三年面無表情的眉頭仍舊緊皺， 但至少目前確認知道更多的是那隻烏鴉，並撫摸淵的羽翼似乎安撫，手也似乎開始習慣撫摸著的觸感。<br><br>「……他病死了。」但如果有那本書就不一樣了。<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>還有超多小跟班（？？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊院長TTTTTT（怎麼是你哭</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>怎麼是你wwwwwwwww</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>WWWWWWW</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「生病、對人類不好。人類會死掉，會難過，沒有反應。」摸來與人類肌膚一樣的溫暖羽翼沒有收回，靜靜地待在原處讓對方撫著。<br><br>「但生病，可以改編、改變事情。人類、會變得溫柔，父母與孩子，都願意犧牲。」輕聲回應的同時，其他羽翼在不知不覺間湊了上來，仿照它所說的角色，摩挲起陸人的髮頂。<br><br>「它喜歡生病，但又不喜歡。」</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……」意外的感受到頭頂的碰觸而驚訝，瞳孔也因驚訝而放大。<br><br>髮絲隨著羽翼的觸摸而擺動凌亂，不禁回想上次這樣親密的觸控是多久以前<br>甚至不是這幾年有的事而是更久以前。<br>「……家人，就是要互相照顧，不用生病也會。」略微艱難的擠出了一句話。<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>似乎沒有留意到陸人的肢體變得僵硬，嬰孩因為這個答覆而逕自開心地笑著。<br><br>「陸人、很溫柔。太好了。它也會，保護你的。」<br><br>「烏鴉、烏鴉、放我們走。帶它去找書。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>我愛淵（幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>聽到淵的笑聲，似是也放鬆了一些。<br>也是跟着淵眼神似是往四周尋找。<br>「你不信任我，為什麼。」直接地對著烏鴉詢問，想直面對決。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他們一副要跟人幹架的樣子（烏鴉：？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>然而連你們自己的迴音都沒有的，那些詢問的話語就這樣被黑暗吞沒。</dd></dl>
+	<dl class="tc1 nc15"><dt>■逃走</dt><dd>一片漆黑。沒有任何的光。看不到盡頭，你們甚至不知道該朝著哪個方向前進。<br><br>什麼都看不見。<br>什麼都聽不見。<br><br>你們只能互相依靠著，在這黑暗的世界中站著。&lt;sanc0/1&gt;<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>CCB&lt;=69 SAN (1D100&lt;=69) ＞ 98 ＞ 致命性失敗</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="SU">CCB&lt;=58 SAN (1D100&lt;=58) ＞ 12 ＞ 成功</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>神話生物之恥</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>淵 大失敗san-2</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>&gt;:(</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>&gt;:(</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>感受不到原本在山上的生氣，這裡寂靜得像是要將它重新吞進黑暗，再次陷入無法估計的沉眠。它早已記不清上一次失去意識的時日，但卻突然憶起當時冰冷的感覺。潔白的羽翼抖了抖，幾絲奇異的顏色瞬間在石像上流竄。<br><br>「淵不喜歡這裡⋯⋯⋯⋯嗚⋯⋯」它發出像是要哭出來的低鳴，收緊了翅膀，將陸人納入自己的懷中。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>SC大失敗所以（抓頭</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>可以啦 吧（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>不要在這裡昏厥ㄟ！！！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>被圈入進淵的懷內，兩人的體型差讓他有整個被納入淵體內的錯覺，雖然不至於無法呼吸卻視線也被遮蔽。<br><br>但白色遮蔽在眼前遠不如黑暗，耳邊的似乎帶著泣音的低鳴也似比自己難過更難受。森陸人艱難地伸出手安撫收緊的翅膀「我、在這。」不要怕。<br><br>「所以什麼不好的東西？」森陸人持續向烏鴉詢問，希望得來回應。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我大親一口陸人（？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>&gt;:(</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>:(</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>烏鴉沒有回應。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>&lt;偵查&gt;or&lt;靈感&gt;</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>(??</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>謝謝（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="FA">CCB&lt;=65 &lt;偵查&gt; (1D100&lt;=65) ＞ 74 ＞ 失敗</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="SU">CCB&lt;=65 &lt;偵查&gt; (1D100&lt;=65) ＞ 45 ＞ 成功</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="SU">CCB&lt;=85 &lt;靈感IDEA&gt; (1D100&lt;=85) ＞ 77 ＞ 成功</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好ㄟ！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>因為無法判斷自己身在何處，以及消失去向的烏鴉去了哪裡，你們僅能憑著直覺不確定地往前走。<br><br>然而，正當你們感到愈發困惑的時候，遠處出現了模糊的小小紅光。<br><br>你們朝著光的源頭往前走，逐漸地，紅光慢慢變亮。<br><br>看來那是燈的光芒。<br>雖然沒有照亮周圍的東西，但還是模糊地照出了拿著它的人的輪廓。<br>但是僅憑這點光，還是無法確認那人的樣子。</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>被懷中的人安慰之後，嬰孩很快就停止了啜泣。似乎是因為找回安全感的關係，淵緩緩地鬆開對陸人的禁錮，改以搭住對方的臂膀，試圖在黑暗中一邊前進、一邊摸索。<br><br>「那裡、有人⋯⋯是誰？」發現光源的石像不疑有他，緩緩朝那移動。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>跟著淵一起移動，雖然改以搭著肩膀，摸索前進。<br>幾乎同時和淵同時發現，緩緩的停住，輕輕拉了淵的翅膀。<br><br>「是誰？」<br></dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>&lt;靈感&gt;</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="SU">CCB&lt;=80 &lt;靈感IDEA&gt; (1D100&lt;=80) ＞ 29 ＞ 成功</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="SU">CCB&lt;=85 &lt;靈感IDEA&gt; (1D100&lt;=85) ＞ 42 ＞ 成功</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>你們注意到那個人在四處張望，正在尋找什麼東西的樣子。<br><br>也隨著你們一打招呼，那個人就注意到了這裡。<br>他將那盞燈轉向了你們兩個人，同時你們也能注意到她的模樣吧。<br><br>一個就如森 陸人一樣的人類，她雖然外表狼狽，卻在注意到你們之後帶著活力的露出了笑容。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哦哦居然真的是人！！（什麼意思</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「太好了！終於找到你了！快、快和我一起從這裡逃走吧！」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>ㄟ幹什麼意思！！！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（抓緊陸人</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>就這樣說著，那個人牽起森 陸人的手，轉身飛快地跑了起來。<br><br>她的態度並不強硬，反而像是在引導你前進一般。伴隨著燈籠的搖晃，微弱的燈光在黑暗中搖曳著。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>ㄟ！！！！！！！！</dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>▼給HO神話生物的秘密情報<br>你突然這麼想道。如果就這樣讓森 陸人被帶走，你們可能永遠不會再次相見了。瞬間，強烈的不安感襲來。燈光越來越遠。不行，要阻止他被帶走。要從那赤色的光芒中保護森 陸人……<br><br>森 陸人可能就這樣在你面前消失的恐懼讓你感到震撼。<br>&lt;sanc1/1d3&gt;</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我先抓的！！！！！！！（幹</dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>在這邊SC !</dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>ＴＴＴＴＴＴＴＴＴ</dd></dl>
+	<dl class="tc3 nc9"><dt>淵</dt><dd class="SU">CCB&lt;=67 SAN (1D100&lt;=67) ＞ 46 ＞ 成功</dd></dl>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>(撫摸)</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>&amp;淵你是不是剛剛就忘了扣san (吃餅乾發不出聲音</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我都有記得扣！但因為有隱藏數值所以主頻道沒有顯示（？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>還是我這邊要打開ㄇ！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>喔喔喔喔抱歉那沒事 !</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>(開著全能視角沒發現你隱藏</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>XDDD</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>翅膀搭著的溫度突然就被冰冷取代，它望著被女性帶離的陸人，似乎無法做出任何反應，顫抖著的翅膀只是緩慢地伸展開來，嬰兒的哭喊隨即從中心傳出。<br><br>「陸、陸人⋯⋯！不要走！」在叫聲消失在這片黑暗之前，淵的一切從原地脫離，不論聲音還是身形，都在下一個瞬間更加靠近兩人，簡直就像是在眨眼之間快速移動。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>甚至還來不及反應就被拖着跑。<br>即便是帶著引導意味的前進，森陸人依舊帶著疑慮，聽到身後的呼喊更是遲疑。<br>「你是誰？」皺著眉的森陸人雖然沒有掙脫對方但仍是停了下來等著身後的淵。<br></dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>如果要阻止對方被帶走，可以用&lt;DEX*5&gt;或&lt;觸肢&gt;進行判定。</dd></dl>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>主要看你想以甚麼方式阻止他們。</dd></dl>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>幫我在這邊骰 ! 我會幫忙敘述</dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>好！那我移動來阻止好了 我去骰ㄍDEX</dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>喔喔好！</dd></dl>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>擋在他們面前的那種感覺嗎 ?</dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>對對！</dd></dl>
+	<dl class="tc3 nc9"><dt>淵</dt><dd class="SU">CCB&lt;=18*5 &lt;DEX*5&gt; (1D100&lt;=90) ＞ 53 ＞ 成功</dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>然後加上哭來阻止（？？？</dd></dl>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>好wwww那哭的部分你可以等我R完補充XD</dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>沒問題（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「啊啊、我是來幫助你的──」女性氣喘吁吁的回過頭來回應陸人，然而卻突然面露懼色的猛然停下了腳步。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>下一秒，你便注意到淵那高大純白的身影瞬間出現在了你們的正前方。<br><br>他微微敞開羽翼像是在試圖攔住你們的去路，潔白的面孔上掛著細小的淚珠，若不提對方猛然出現的行為，這樣的樣貌就像是藝術品一樣令人動容。</dd></dl>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「糟......」<br><br>女性猛然的回過頭，同樣注意到淵的身影的她原本想說點什麼，但又突然像被其他事物吸引了注意，突兀地環視了一下周圍的黑暗。<br><br>接著，甚至都沒來得及開口，女性就這樣帶著抱歉的表情鬆開了陸人的手，轉身逃進了黑暗中，和燈光一起消失了。</dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>請開始你的表演 (??</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>你看只有我對你好！（幹</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>(揮手再見（幹</dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>（摩拳擦掌（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「嗚嗚、嗚⋯⋯為什麼、不帶淵⋯⋯不要、丟下它⋯⋯」潔白的面容緩緩凝聚水珠，斗大的淚水不斷從被遮蔽的上顏流下，就像是這名女性正在哭泣一般，然而從中心傳出的卻是嬰兒的聲音。<br><br>「好過分、好過分⋯⋯」與壓迫性十足的舉動不同，它沒有展現攻擊性，只是無辜又帶有幾絲埋怨地哭著，碩大的翅膀也在另一名人類跑遠後，緩緩地垂落下來。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>看著被鬆開的手，和逃跑的女性再看著眼前哭泣的石像。<br><br>思量了片刻，森陸人被孩子一般哭泣的舉動無奈。他主動靠近沮喪得翅膀都垂落的石像。<br>「我沒有丟下你。」直男說著，雖然不確定淵聽不聽得進，從口袋拿出手帕，遲疑了一下還是微微掂腳擦了擦女性面容下的眼淚。<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「尼剛剛、明明跑走了⋯⋯嗚⋯⋯」見陸人走近自己，它趁勢收起翅膀，迅速地將男子又重新抱回懷中。接著它緩緩彎下腰，使溫熱的眼淚滴落在柔軟的布料上，一舉一動都像極了正在撒嬌的人。<br><br>「那個人、覺得它是『妖怪』⋯⋯」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>（委屈）</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「我沒、」還沒否定完就又抱進去，無奈地輕拍，原本略顯生疏僵硬的動作都變得習慣沒有抗拒對方的撒嬌。<br><br>「嗯，但你是淵。」沒有否認那名女子恐怕是把淵視成妖怪，只是淡淡的說著。<br><br>安慰淵的過程中森陸人看向四週，即使他剛剛停下去卻不代表他願意待在這，他還有目的。<br>視線鎖定在剛剛女子消失的方向思考如果繼續朝那裡前進是不是有機會離開？<br>思及此，森陸人又擦了擦往自己方向湊的眼淚，並推出淵的懷抱，但是主動輕握住淵的羽翼像是牽手一般，並指向女子離開的方向。<br><br>「跟著走，看我們能不能離開。」</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>在對方的溫度及安慰下，很快地，嬰孩的聲嗓少去了哭腔，眼淚也停止流淌，看來是安全感攝取得足夠了吧。<br><br>「恩、但是，不可以，鬆開喔⋯⋯」雖然被推離了擁抱，但它仍乖乖地覆蓋住陸人的手，像是回牽一樣，並用原本緩慢的速度往女子離開的方向移動。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>你們順著女性離開的方向前進，然而不論走了多久似乎依舊沒有任何不同。<br><br>黑暗。<br><br>永無止盡的、一無所有的漆黑。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊 阿衍要先Ｒㄇ！</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>啊沒事我只是想先打一點反應，如果你有想要的可以先！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>手機手指粗壓到（</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哦哦好！那我小打一下</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>沒事www</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>羽翼抓緊了陸人的手，表情毫無變化的石像，似乎是想為這片永無止盡的黑暗增添生氣，又或是心情很愉快的關係，傳出了細小的歌聲。<br><br>「通過吧　通過吧<br>這條小路 是通往哪裡呢<br>是通往 天神大人所在的小路<br>快點 讓我通過吧」<br><br>江戶時代有點恐怖的童謠，被無邪的嬰孩輕和地唱著，就像是現代中，那牽著爸爸媽媽的手，準備過馬路的小朋友一樣。這似乎也體現了它的心境，希望可以快點回去見飢山中。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>童謠可以參考這邊（？<br>https://www.youtube.com/watch?v=PrfFIns0-3s<br><br>（第二首）<br>https://home.gamer.com.tw/artwork.php?sn=1859561</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（一邊聽一邊打 ）（毛毛的（想到是淵唱的）</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>：真好聽🥰</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹ㄚ（拔掉你濾鏡（幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>……漆黑而又沒有盡頭、一直、一直。<br><br>儘管在沉穩的森陸人此時也不禁感到焦慮，然而身邊的淵唱著的童謠並不如好何讓人緩解，但被緊握的手還有童謠的歌詞都令森陸人淺嘆。<br><br>即使身邊的淵讓他無法恐懼，但窮無止盡的黑暗和沒有盡頭的空間隨著時間都讓他越發焦慮。<br><br>『什麼是保護？帶來了什麼？』<br><br>腦裡不斷思考，卻毫無結果。原本就緊皺的眉頭鎖得更深，握著羽翼的手也下意識的握得更緊。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（連人帶皮一起被拔掉（幹？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>救命ㄚ</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>不要啊 ((</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>😠拔不掉不要亂拔</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>現在該怎麼辦呢？<br>就在情況又回到原點的時候，你們面前射進了一道光、光芒輕易地破開了這片無盡的黑暗，而在那一瞬間，無數烏鴉嘎嘎的叫聲也隨之響起，填滿了杳無聲響的世界。<br><br>混雜在其中的還有一個你們從未聽過的聲音——既不是人類，也不是烏鴉。而隨著視野不斷開闊起來，聲音也慢慢地變淡，消失。<br><br>……<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（只好黏回去（</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>烏鴉！！！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc17"><dt>■</dt><dd>再次回過神來的時候，周圍的景色已經和之前的地方完全不同了。<br>大概是烏鴉們帶你們來這裡的吧。你們剛想再問些什麼，那些烏鴉就飛散開來，融入夜色中，消失了。<br><br>夜晚降臨了。<br>樹木搖曳發出沙沙的聲音，混雜其中的還有那些生活在夜晚的生物的氣息吧。<br>那些動物或許正帶著警戒地從暗處的哪裡看著你們。一想到這一點，你們便不禁打了個寒戰。<br><br>環顧四周後，你們發現了一個小小的洞穴。<br>洞穴裡面很暗，但是將就地住上一晚等到天亮應該是沒問題的。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>謝謝烏鴉！！！！（幹</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>這邊也可以小R一下後去睡覺，如果不想睡的話也可以看想做甚麼，完成後就會接續到早上了</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「烏鴉、大烏鴉——！」朝天空這麼喊著，想呼喚原本巨大的烏鴉回來，詢問剛剛的情況以及書的下落，但翅膀拍打的聲音很快遠去，它只能對著漆黑的天色無謂地生著悶氣。<br><br>「回來了、回來了。但天暗暗⋯⋯人類要睡覺了⋯⋯」</dd></dl>
+	<dl class="tc1 nc2"><dt>阿衍</dt><dd></dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>對突然改變的景色眨眨眼，因為石像面無表情加上本來就鈍感的人沒有察覺淵生悶氣，逕自走進了洞穴。<br>而聽到淵說睡覺，估計是走了太久也有些許疲憊的點點頭。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>（森。8會讀空氣。陸人）</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>（ㄍ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>最可愛（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「它，做床給陸人。」看見對方面帶倦意，淵果斷地伸直翅膀，折斷幾枝茂盛的枝葉，帶著進入洞穴中。似乎是打算鋪到地上，做一個像早上那樣的簡易床鋪。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>醜三（幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>看到淵替自己做簡的床鋪也想著幫忙，一同走了過去。<br>但似乎做的範圍更大包括了淵的尺寸。<br><br>「明早，四處看看吧。」看能不能找到烏鴉問清楚，而這又是哪裡。<br><br>這時也才想到，拿出手機似乎是想看看能不能定位到自己在哪裡。<br><br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「早上，幫陸人，找吃的。」石像緩緩移動到對他們來說綽綽有餘的樹葉堆上，高聳的翅膀也漸漸垂下，覆蓋到陸人身上，將人往自己的身邊帶近，似乎是打算將此作為暖被。<br><br>「還有書，跟烏鴉。」</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「嗯。」聽到淵還想著魔法書的部分而一舉一動都透露自己的關懷，眉間變得柔和的點點頭。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>森 陸人 請&lt;幸運&gt;</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="SU">CCB&lt;=80 &lt;幸運LUCK&gt; (1D100&lt;=80) ＞ 64 ＞ 成功</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>你打開了手機，所幸的是摔下山崖後似乎沒有太大損傷，且還有一些電量。<br>但或許因為已經是收不到訊號的地點，你的定位沒能顯示出你們的位置，僅無助地在地圖上左右閃爍、飄移著。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我好像可以睡覺ㄌ（？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>看阿衍！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>那睡覺厚了</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>也許是因為你們已經很累了，所以你們一躺下，很快就有了睡意。<br><br>今天實在是太不尋常了。<br>你們究竟會變成什麼樣呢？<br><br>對此有著不安的你們，就這樣陷入了睡眠。<br></dd></dl>
+	<dl class="tc1 nc18"><dt>■記憶1</dt><dd>如果說這是夢的話，那實在是太過於色彩鮮明。所以，這一定是曾經發生過的事情吧。<br><br>桃紫色的空中，群星閃耀。<br>在幻想的世界中，你們相遇了。<br><br>被三對羽翼覆蓋的潔白石膏像的異型，和一個哭泣的孩子。<br><br>「你遇到了什麼悲傷的事嗎？」<br>異形這麼問著。<br><br>「我和朋友吵架了……」<br>孩子這麼回答。<br><br>是嗎。異形回應道。<br>然而像是在說「沒關係」一樣的，異形坐在了孩子的身邊，將額頭輕輕地貼在了孩子的臉頰邊。<br>孩子似乎稍微安心了一點，雖然表情還有點緊張，但是他擦乾了淚水，然後悄悄地靠在了異形的身邊。<br><br>兩個人已經不是第一次在這裡見面了。在睡著後，兩個人便偶爾會進入這個夢幻般的世界聊天。<br>開心的事、悲傷的事、愉快的事。孩子說著每天發生的事情，異形饒有興趣地聆聽著。<br><br>他們對彼此毫無恐懼。只在夢中見到的朋友，不知何時對彼此產生了愛，開始產生了「只想待在那個人的身邊」的感情。<br>但是，隨著孩子慢慢長大，做夢的次數減少，見面的頻率也減少了。就這樣，不知不覺間記憶變得淡薄，仿佛這只是一個孩童曾經的幻想。<br><br>「請一直留在我身邊吧。」<br>孩子這麼說著。<br><br>「如果那能實現的話就好了。」<br>異形這麼回答。<br><br>這是我們幼時的記憶。<br><br>為什麼——為什麼會忘記如此重要的事情呢？<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>看完了</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我也看完ㄌ！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc19"><dt>□天亮</dt><dd>你們醒了過來。<br>揉著惺忪的睡眼，確認眼前的存在。<br><br>那的確是，<br><br>曾經在夢裡遇到的重要之人。<br></dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>▼給HO神話生物的秘密情報<br><br>你想起來了。<br>你對人類產生興趣的契機就是因為眼前的這個人。<br>因為在夢境的世界中和他的多次相遇和對話，你對這個人也產生了感情。<br><br>你開始對森 陸人產生強烈的感情。<br>還想待在這個人身邊，還想和他說話。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>賀</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「陸人、陸人。森陸人。」覆蓋在人類身上的羽翼挪出一個縫隙，露出男子的眼眉，淵低下身子，湊近觀察那張成熟的面孔。雖然潔白的面容依舊未勾起嘴角，但不知為何卻隱隱透露出喜悅。羽翼也好似許久以前那般，輕輕地蹭撫對方的頰邊。<br><br>「原來是你的名字。陸人。」<br><br>「你回來了。來找它了。」嬰孩開心地笑著。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……。」被環抱著的羽翼，無法負荷，就如當機一般，神情間帶著震驚。<br><br>沉默許久，環抱著的羽翼第一次、被森陸人緊緊擁著。<br>是你、是你。<br>開了口，嘴部彷彿在說話的開闔然而聲帶卻像是停止運作發不出一絲聲音聲響，只有微弱氣流劃過的聲音。<br>「……太久了。」言語是對自己的怒意，連安撫都略帶僵硬的森陸人面對臉頰上羽翼親密的親蹭，回應地蹭了蹭，面對比自己體積更大的淵甚至埋得更深了些。<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>TTTTTTTTTTTT</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>TTTTTTTTTTT</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>大哭</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>TTTTT</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>大吃一口</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>大吃兩百口</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（狼吞虎嚥）</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「它以為你不在了。對不起。現在才想起來。」聽見對方這麼說，淵未被抱住的其他羽翼，也緊緊回擁住他的身軀，也才發覺這副身體在不知不覺間，已經比自己記憶中的還要高大，聲音也不比以往稚嫩，而是成年男子的嗓音。<br><br>這之間到底經歷了多少時光呢？淵從來沒有數過，因為那實在是太孤單了。自己的聲音以及性格，似乎也在不自覺間仿照著那孩子帶給他的感受，正如被稱作愛的情感，此時卻也能稱之憐憫、不捨、懷念，以及喜悅。<br><br>「吶、陸人過得怎麼樣？它還想再聽。你的事情。」它輕聲地說著。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>LOVE</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>Love</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「、」聽到熟悉的關懷，森陸人雖然對此感到眷戀但對淵的那聲對不起而不悅「是我太久了，不是你的問題。」<br>硬梆梆的回應著，聽起來很生氣但淵或許會察覺那不是對淵的怒意是對森陸人自己的生氣。<br><br>但思考了很久，森陸人對於淵的回答也回應不出來，森陸人的環境過於奇特，重心放在家人與興趣，但老院長的離去直至就今日仍感到空虛。<br><br>「無趣、但還過得去。」老實說著，但回想起淵又遇到了對方那股空虛似乎被填滿許多。<br><br>是對家人的愛嗎？小時候內心總是將淵這奇異的存在視為與家人同等，但因為是自己獨有，而他人無法取代，能佔有的愉悅感又顯得有所不同。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「但不會了。」森陸人嘴角微微地勾起。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>LOVE</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>大親一口</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>聽出這個怒意源自陸人對自身的苛責，純白的羽翼輕輕地撫摸他的髮頂，悄悄地安慰著。而後看見對方洋溢的微笑，它也跟著輕笑出聲，「陸人，開心。它也開心。」<br><br>「我們，還要一起散步、聊天、做有趣的事。」它抖了抖翅膀，在空中比劃著什麼，看起來就像是正在做熱身運動，準備要展開一場場遊戲。<br><br>「它要跟陸人待在一起。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>抖抖翅膀有夠夭壽可愛</dd></dl>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>（抖抖）（抱抱）</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「嗯。」淺笑著，森陸人點點頭，似乎也有所期待著。<br><br>森陸人站起身，更用力的緊擁著淵後鬆開。<br>「那、四處看看吧。」比起找到魔法書的線索，似乎跟眼前淵的相處變得更加重要，都變得有趣。</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>它也緩緩直起身子，雖然已經不再擔心對方會突然離開自己，但它仍舊伸出翅膀，讓羽翼纏上對方的掌心。「牽牽⋯⋯」邊這麼說著，邊以同樣緩慢的速度移動到對方身側，打算一起走出洞穴。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>牽牽</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「嗯。」沒有抗拒的任憑羽翼纏上自己甚至是彷彿為了確認存在般握了握，甚至是彷彿突如其來如幼時一般，趣味性的捏了捏羽翼並一同往外走去。</dd></dl>
+	<dl class="tc1 nc20"><dt>■魅惑之森</dt><dd>從洞穴中出來，周圍的環境和昨天晚上所看到的又產生了變化。<br><br>樹木層層疊疊，巨大的樹冠伸展開來，甚至覆蓋了天空。<br>從縫隙中陽光灑落下來，葉片閃耀著虹色的光。樹幹上的金色爬山虎如橋一般連接著，枝頭結滿了五顏六色的果實。附近應該有河流在流動，清爽的空氣流淌著。<br>面前有一條像是被野獸踩出來的道路，你們自然地感覺前方應該有什麼人在。<br><br>路邊盛開著花。花扭曲而形態各異，即便如此也還是感覺十分美麗。<br><br>對於淵來說，這也是從未看到過的東西。<br>其中有一些則是森 陸人也認識的花。<br></dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>&lt;知識&gt;或&lt;靈感&gt;或&lt;偵查&gt;或&lt;博物學&gt;</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="SU">CCB&lt;=85 &lt;知識KNOW&gt; (1D100&lt;=85) ＞ 77 ＞ 成功</dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc5"><dt>ＫＰ烏鴉</dt><dd>▽馬醉木（asebi）<br>別名：ashibi  科屬：杜鵑科<br>花語「獻身」和「奉獻」據說來源於希臘神話。傳聞，為了拯救國家決定犧牲自己的安朵美達，最後卻被英雄珀爾修斯所救。<br>與這種花的花語相關的名言中，有著歌德的這句話：「不要為無聊的事情而犧牲重要的東西」<br><br>花語是「犧牲」「獻身」「和你兩個人一起旅行」。<br></dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>你知道眼前的這種白色如鈴鐺般的小花叫作馬醉木。</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="SU">CCB&lt;=80 &lt;靈感IDEA&gt; (1D100&lt;=80) ＞ 21 ＞ 成功</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>淵你對這樣的花並沒有任何知識，畢竟你一直一直生活在見飢山的山谷中，就算其中有些願意和你交談的人類，但也總是很快地就忌憚於你的存在而離去。<br><br>但你能感覺到眼前的花朵有著和你一樣的顏色，或許這點會讓你感到「親切」也說不定。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>看到馬刺木微微一頓卻又舒展眉目，森陸人捏了捏淵的羽翼。<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>阿衍這是Ｒ好了ㄇ！（？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>發現外面並不是自己熟悉的風景，淵有種自己仍在做夢的感覺。但因為有身旁的人在，所以即便身處陌生的地方，它也不再感到害怕，而是抱著玩樂的心，好奇地探尋著。<br><br>「陸人，這個花是什麼？好漂亮。」</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「馬刺木，他希望我們享受旅行。」似乎是看出淵的興致，陸人順道解釋了花的花語。<br>「和你一起的旅行、是他的花語。」雖然還有『犧牲』、『獻身』的含義，但森陸人沒有說出來。<br><br>「喜歡？」<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「馬醉木，在祝福我們。喜歡。」它坦率地說出原因，嘻嘻笑道。而論及剛得知的新名字，嬰孩的聲嗓又重新傳出。<br><br>「吶、陸人以前都叫淵作『你』。」<br><br>「人類叫過它、淵、妖怪、石頭、凜、這個東西。陸人，也幫它取一個名字。」翅膀微微搖曳，透露著它的期待。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>取名……（森•取名很爛•陸人）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹超好笑</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我預料到了但 耶（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>叫他咕咕嘎嘎啦（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>或是吧哺吧哺</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>wwwwwwwwww</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>超好笑</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>可以啦（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>wwwwwwww</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>孤苦嘎嘎</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>而且他每次還要這樣叫他</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>大烏鴉：？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>烏鴉：？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我還有想到天使 小白 之類的（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>森陸人：羽毛</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹ㄚ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>超好笑wwwww</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>😭</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>PL痛扣</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「我也這麼想。」同樣認為這是好含義的森陸人點點頭，淺淺勾起嘴角，想摘取其中一小簇送給淵，轉過頭正想遞給對方聽到對方希望森陸人幫他取名。<br>森陸人思考了一陣子，他捻了捻手中馬刺木的花莖。<br>「……就叫白羽（しらは）吧，我很喜歡、你的羽毛。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他很會取欸？？？？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>😇</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>wwwwwwwwww</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他從直男畢業！（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>wwwwwwwwww</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>謝謝世界</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「白羽，白羽。它很喜歡。」嬰孩高興地說道，包覆著自身的白色羽翼同時在空中拍動數下，那雀躍的模樣，看起來就像下一秒要帶著陸人往上飛行一般。<br><br>「陸人，喜歡。再給陸人，禮物。」說著說著，原先抓著陸人的翅膀緩緩鬆開對方的掌心，似乎打算再脫落一枝羽毛給他。</dd></dl>
+	<dl class="tc1 nc2"><dt>阿衍</dt><dd></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>醜四（好ㄌ</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「！不行、」猜到白羽意圖，回想羽管上帶血的痕跡，比起詢問對方會不會痛，森陸人只想阻止。<br>「給你這個、」在白羽回過神前，森陸人先遞出了剛剛還沒送出的小花希望轉移他的注意力。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>跑完團如果醜10我就畫森陸人親親白羽🤬</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（？？？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>那你趕快醜十（靠杯</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>QQ</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>還沒來得及問拒絕的原因，話語便被白色的禮物堵住，消失在無形之中。它純粹無邪的微小歡呼迴盪在山谷間，並以方才最接近掌心的羽翼，接過了對方遞上來的小花。<br><br>「禮物、禮物。謝謝陸人。」溫暖的羽翼將花朵層層覆蓋，它低下頭的模樣，就像在細細欣賞著這份禮物。接著，它使其與更早之前收到的外套一樣，讓花莖嵌入羽毛之間的縫隙，穩穩地固定在原處，僅露出白色的花瓣，以及一抹綠意，成為了這具石像的第三種顏色。<br><br>「陸人，會不會餓？白羽，摘果實。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>嗨嗨嗨</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>嗨嗨！～</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我今天是大多時間不能開麥的狀態 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>喔喔好！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我還在補你們的進度等等我 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒問題慢來！🫡</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我在回家路上上大概還有500公尺會準時到家。（……     好沒問題！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>慢來！小心安全～～</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>路上小心~~</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我看完了 感覺你們好像可以繼續(?</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>到加了我上個廁所（ry</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>喔喔喔好</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>森陸人搖了搖頭，略帶滿意度看著增添羽翼顏色的花朵融入。<br><br>「我還好，你呢？」又伸出手牽住了白羽的羽翼，順帶的向前走著似是順著山徑前進，也似是看著周圍有沒有白羽所說的果實。<br><br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「陸人不餓，白羽、也不餓。」羽翼纏繞回陸人的掌心，緩緩地跟著向前移動。擠壓落葉時發出的沙沙聲、屬於山林特有的滯空感，令它覺得此刻就像平時在山谷間散步一樣。<br><br>不同的是，現在的心情多出幾分愜意與喜悅，只因身旁有著重要之人陪伴。石像傳出輕柔的幾聲音調。</dd></dl>
+	<dl class="tc1 nc21"><dt>□虹湖</dt><dd>走了一會兒，你們來到了一個寬闊的地方，那裡有一個巨大、美麗的湖畔。<br>湖水中水草搖曳，反射著天空的光，創造出如同彩虹一般美麗的，七彩的水面。就像是繪本中的世界一樣。<br>樹枝固執地伸展著往前，在枝條的末端，湖面中心的巨大岩石上，一個披著美麗的黑髮，有著銀色肌膚的年輕人佇立在上。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哇賽</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「哎呀哎呀，這可真是少見……在這種偏僻的地方居然來客人了呢。你們應該就是洛本說過的那兩個孩子吧。」</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>那個被神秘氣氛籠罩著的青年戴著兜帽，微笑著。那笑容簡直像是要把人吸進去一樣——你們能意識到他並非人類。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>婆</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>哇塞好好看</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>真的婆（幹？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>歡迎大家來看我老婆</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他還塗指甲油</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>謝謝她超辣</dd></dl>
+	<dl class="tc0 nc23"><dt>阿</dt><dd>好愛髮型</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>他是我的二老婆</dd></dl>
+	<dl class="tc0 nc23"><dt>阿</dt><dd>大老婆是誰（ㄍ</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>你們總有一天會見到的 (</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>阿衍你怎麼變阿了wwwwwwww</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>阿wwwwwwwww</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>辣到眼瞎了</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>衍都沒了</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（爛</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>WWWWWW</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>似乎是因為遇見不認識的非人生物，它下意識地與陸人靠得更近，白色的羽翼幾乎快要覆蓋住他的全身。<br><br>「是誰⋯⋯？」嬰孩問道。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹笑死</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「我的名字是塔瑪什喔。」笑咪咪。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>被覆蓋住，只能稍稍撥開遮住自己臉的羽翼也同樣貼近白羽並看向對方，被羽翼遮住的地方手伸往包包。。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc22"><dt>塔瑪什</dt><dd>我要被槍殺了嗎(笑)</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>沒有啦。👀</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「塔瑪什，復活人的魔法書，在哪？」既然對方認識大烏鴉說的人，那或許也會知道這個東西的下落。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹幹好兇</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「哇、你怎麼想要這麼危險的東西呀~」有點驚訝的摀住了嘴，但似乎並沒有真的很驚訝。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……你知道嗎？」沒看出對方假裝驚訝的摸樣，但因為不在乎危險所以也沒什麼反應。</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「危險、為什麼？」聽見陸人想要的東西可能會傷到他自身，淵有些擔心地反問道。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我去個廁所！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「使用魔法啊~是要付出代價的啊，越是厲害的魔法要付出的代價就越多。」<br><br>「復活死去的人呢，是改變這個世界的法則，要付出的代價可是不小的呢~」他伸出了食指，有些俏皮的點了點下唇笑著。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>回！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>歡！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「⋯⋯什麼、代價？」沉默了一下後繼續問道。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「什麼代價。」聽到關鍵甚至是跨出一步，不多但脫離了羽翼一些。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>心有靈犀（？</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>貼（？）</dd></dl>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>（貼）</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>如果想從對方口中打聽的話請進行&lt;交涉技能&gt;判定。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>直接骰ㄇ還是要先RP！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>都可以 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>那我先骰好ㄌ！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（然後發現自己沒有點交涉技能）<br>心理學應該不行？QQ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>也想問（ry   我是點了信用但應該也沒用咪QQ</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>信用可以，心理學不行</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我看一下淵的角卡</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>嗚呼好謝謝烏鴉！老婆加油🥺🥺🥺</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="FA">CCB&lt;=55 &lt;信用&gt; (1D100&lt;=55) ＞ 66 ＞ 失敗</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>……老婆加油🤲</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊啊啊</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>淵感覺應該沒有www 或是你要物理賄賂他 (欸</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>還是我可以拼拼看說服基礎值嗎（？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>也是可以</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好ㄟ！（就要賭</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="FA">CCB&lt;=15 &lt;說服&gt; (1D100&lt;=15) ＞ 36 ＞ 失敗</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>！！！（期待奇蹟（欸</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>😭（就要賭</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>差一點可惡😭</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我們來賄賂他（？？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>可惡剛剛沒有摘果實</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我只有花花但淵不會給（？？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>你們見到青年歪著頭似乎思考了一下，然而，他只笑著雙手一攤，「我不知道呢。」<br><br>接著像是惡作劇得逞般的發出了銀鈴般的清脆笑聲。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>送你手錶勞x士（摘(X</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>雖然但是他好可愛（恨</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>欸wwwwwwww</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>你手錶是勞x士嗎(重點</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹ㄚ好貴wwwww</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我不是但森陸人可以是（幹啊</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>WWWWWWW</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>真帥（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我的手錶是孤狗的……（不重要</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>似乎是感覺到你們的無助，塔瑪什微微瞇起眼笑著，「我一直很好奇洛本帶來的孩子究竟是什麼樣的人，沒想到是這麼可愛的孩子啊。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我的是三星(欸</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>欸為有考慮</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>要換三星 烏鴉覺得好用嗎（XX</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我覺得如果手機是三星就還不錯 (?</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>但我個人好像沒有很需要鬧鐘跟計步器以外的功能</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……。」下意識覺得對方說的是白羽，有更往前靠似乎是想站在白羽身前。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>所以覺得用起來沒有特別的感覺 (</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「塔瑪什、欺負我們⋯⋯壞人⋯⋯」聽出對方知道內容但不願意告知，它像小孩一樣發著脾氣，用稚嫩且細小的聲音埋怨道，後方的一對翅膀也如抗議一般地伸展。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc22"><dt>塔瑪什</dt><dd>好可愛喔 (多拉A夢關愛臉)</dd></dl>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>&gt;:(</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>原來原</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>原本想回三星 看到淵直接可愛到送出奇怪東西</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>寶貝嗎……</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好好笑</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>陸人的寶貝🥺(?</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>唉（幸福嘆氣（</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>大寶貝</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「請告訴我，拜託你。」雖然可能沒什麼用處，但森陸人還是放低了姿態。<br><br>聽到白羽帶著情緒的抱怨森陸人臉上劃過一絲不明顯的笑意，似是安撫又似純粹想要撫摸，手指梳理這位不斷站在自己身旁的白羽。<br><br>「或是、有想要什麼嗎？」</dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「嗯~但是小洛本應該會不希望我說吧？」他看了淵又看了陸人，看起來有些糾結的樣子。<br><br>「確實，如果是交易的話，或許他也就不能說什麼了呢。但你們能給我什麼呢？」他饒有興致的對你們開口。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>我暫離一下抱歉！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>ｋｋ</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>被陸人的撫摸安撫，以及多出了一條新的道路，淵微微收起展開的羽翼，對著塔瑪什微微晃動，收起了剛剛抗議的情緒。<br><br>「它有、羽毛。」講到自己能給出的東西，大概也就只有這個了吧。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>回！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>歡！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……」默默掏出自己有的物品、手機、錶、工具組，然後是……森陸人捏了捏白羽似乎帶著些許的情感而後消失。<br>隨後站離一旁的淵，一直微妙避開青年視線的森陸人直視過去，迴避身旁的視線。<br>「……我。」<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>喔齁！！！</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>👀</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹什麼！！！！！！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（抓住陸人拔腿狂奔</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>阿衍直接退DC wwww</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>給我回來！！！！！！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（揮手再見（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>🤬</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>沒我網路怪怪的，等我弄一下🤣🤣🤣</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>超好笑</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>恰巧一下🥺</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（？？？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「陸人？」似是被雕刻而出的細緻五官，緩緩地面對身旁的人，想詢問對方話中的含義。然而，那雙暗沉的雙眼沒有對向自己，疑惑的情緒在被無視的加成下，轉化為不安，最後導向了對方的念頭。<br><br>「陸人、不可以。約好了，要跟白羽、在一起。約好的。」被鬆開的羽翼追向遠離自己的掌心，緊張又堅持地這麼說著。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>寶寶……</dd></dl>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>&gt;:(</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我弄好了！！！耶！！！（大概（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「啊啊、我可不能收下你呢。」塔瑪什用著愉快的語氣笑著看向陸人，「但──」<br><br>他赤腳踏著水面輕盈地踱步到了淵的身旁，繞著打量著那身潔白的石膏羽翼，「我確實有點好奇呢，你的羽毛。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>恭喜　！！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>欸等等你要對我寶寶的羽毛幹嘛</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>遠一點遠一點</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>給你給你！不要拿陸人！（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>😠😠😠😠</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹不準！！！寶寶會痛！！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>&gt;&lt;</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>還來不及鬆口氣，就想著站在白羽前面，有些警戒。</dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「比起自己的性命，一根羽毛更重要嗎？」他往後退了一步，「真是有趣的孩子。」</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>聽見塔瑪什沒有答應陸人的提議，它緊張而繃緊的羽翼放鬆下來，緊接著，主動將其中一隻翅膀伸到了青年的面前，同時把陸人壓回自己的層層覆蓋的羽毛之間，阻止他的視線與行動。<br><br>「給塔瑪什。告訴我們、書。」羽毛相互摩挲、發出沙沙的聲響，很快地，一根潔白的羽翼碎片便落了下來。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>幹、寶貝</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>不要阻止我！（</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>〉：（</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……白羽、會痛。」撇了撇躺在自己包包內的羽毛，但還來不及說更多，視線還有行動就沒熟悉度溫度包覆。只聽到耳邊羽毛摩擦的細碎聲、細密卻不惱人。 <br><br>或許是鬆了一口氣，做了重大的抉擇要拋下剛找回來的白羽隨之被拒絕後舒適的羽翼包圍而有所放鬆，愣神並未察覺那是白羽仍是送出了羽翼的磨擦聲。</dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「那麼作為代價，就告訴你們有關復活術的情報吧~」<br>青年勾了勾手指，掉落的羽毛便被一陣無形的風捲向了塔瑪什。<br><br>「會成為有趣的蒐藏品呢，我很滿意喔。」青年中性的臉龐露出了美豔的笑容，捻住羽毛的手指晃了晃，像是魔術一樣的羽毛就這樣憑空消失了。</dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>啊、問個小問題</dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>！</dd></dl>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>我之後的敘述要叫淵還是白羽比較好（？</dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>我覺得都可以ㄟ！我現在是都打它<br>如果讓淵自我介紹的話，它現在會說自己是白羽！</dd></dl>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>好　那維持統一我還是先都用淵好了</dd></dl>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>敘述的部分</dd></dl>
+	<dl class="tc3 nc0"><dt>赤Seki</dt><dd>赫！感謝烏鴉！</dd></dl>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>OuOb</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>s1D4 (1D4) ＞ 3</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>順利完成「交易」後，屬於嬰孩的嗓音也輕輕地笑著，因為自己的羽毛換來陸人的安全，以及陸人最想要知道的線索，它也不禁感到喜悅。接著，它輕柔地放開懷中的陸人，好讓對方也一起聆聽關於書的線索。<br><br>「沒事。呼呼，就不痛了。」它輕聲向陸人說著。</dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「《死靈之書》(Necronomicon)，裡面記載著能讓死去之人重新復活的方法，人類似乎把他複製成了許多不一樣的版本，但大致上都有記載著關鍵的『死者復活術』呢、啊，好像說太多了。」<br><br>塔瑪什再次踏著腳步，點著湖水回到了那塊巨大的岩石上佇立著，他的斗篷無風自飄的擺盪著，如同淵的羽翼一般微微包裹在他的周遭。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>得知了不應存在於現實的咒語及紀載的魔導書的存在的真相，&lt;克蘇魯神話&gt; +1</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>※場外補充 !<br>這是因為陸人的提問(而且還真的問對人)才給出的情報，這個劇本裡是沒有的，包含克蘇魯神話點數。</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哦哦拿魯齁豆！我也要＋神話對ㄇ！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>對的</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>還真的問對人大笑</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒問題！🫡</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>欸五</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>沒問題謝謝烏鴉一<br></dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>要結團後才能解釋但對真的問對人欸</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>太讚ㄌ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>森陸人好爽</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……所以，如果找到這個、就可以？」森陸人記憶著，並在手機上留下了紀錄，或許是過於開心，森陸人蹭了蹭還包圍著自己的羽翼。<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「太好了，陸人。」看見陸人的神情多了不少精神，也不再忽視自己，溫暖的羽翼也高興地輕撫對方的臉頰。<br><br>「吶、死靈之書，在哪裡？」</dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「能找到都是件不容易的事呢，你就好好加油吧。」他似乎並沒有打算繼續回答問題。<br><br>對話結束後，你們發現塔瑪什也還是一直盯著你們看，似乎在從你們身上尋找什麼東西一樣。用品評一般的視線盯著你們看了一會兒之後，他好像理解了什麼似的，開口說道。</dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「恩……先說我這麼問只是單純出於興趣、你們認為自己此刻的人生，是你所擁有的靈魂初次的誕生嗎？」</dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「或許大多數人類推導出的觀點是正確的，畢竟人類才在幾百年前出生在這個星球上。」<br><br>「但又或許，現在的我們只是在一連串漫長的覺醒中，最新甦醒的一具容器而已呢？」</dd></dl>
+	<p class="tc5 tab"><span>情報</span></p>
+	<dl class="tc5 nc5"><dt>ＫＰ烏鴉</dt><dd>※額外補充情報：<br>有一說胎轉世的時間並不是線性的，例如活在21世紀死去的人，下一世可能是過去19世紀的人（這也是為何有些人會擁有對當代來說過於前衛的發想），所以將一個靈魂的投胎轉世時間線單獨拉出來看，稱之為「覺醒的連鎖」，無論曾經在何處、哪個時代活過，現在的此生在自己的時間線中是最新的一個。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>這邊可以簡單ＲＰ</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>如果沒有要Ｒ的話也可以跟我說，我就會繼續推</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好！這個好酷（？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我簡單Ｒ個</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>阿衍要先ㄇ！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我暫離一下　！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>赫！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>雖然沒能問出書的下落，但往另一方面想，這樣跟陸人的旅程就能繼續下去，似乎也不壞。接下來的目標便是大烏鴉，或是他們口中的洛本了。<br><br>而聽見塔瑪什的提問，它歪過了頭，像是人類一樣做出疑惑的動作。<br><br>「它，不知道。但記得，睡了很久很久。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我也去ㄍ廁所</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>回！＆我覺得阿衍可能睡著了（？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>啊ｗｗｗ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹幹幹抱歉</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我剛剛反應都沒有</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哦哦歡回！想說時間也晚ㄌ我們今天先這樣！可以慢慢回或等明天再回<br>我這邊先晚安～</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好沒問題晚安</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……？」對於塔瑪什一連串的疑問不甚理解。 <br><br>如果是以往的森陸人，可能就直接不予回應，但或許是得到了線索，想回報塔瑪什些什麼，思考了片刻。<br><br>「……我不懂，是不是第一次，很重要嗎？」不太懂塔瑪什的疑問和彷彿哲學的詢問，但照實回應，他覺得思考這些沒什麼意思。<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>（臭、直男、森陸人）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（搬出浪漫大全（？？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>嗨一</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>沒用了這個人（？？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>嗨嗨！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>不准你說他沒用！（一巴掌（幹</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>CCB&lt;=75 &lt;圖書館使用_浪漫大全使用&gt; (1D100&lt;=75) ＞ 13 ＞ 特殊</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>你看！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他超浪漫！（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（閉嘴嘴（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>：/</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>&gt;:)</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>你濾鏡太重：（</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>你才有濾鏡！！他最棒！！！</dd></dl>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>&gt;:(</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（換人生氣（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>對誰有？淵嗎？我有啊（幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>寶寶最可愛，森氣也口愛（捧高高</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>〉：）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>森氣 這個選字很讚（好</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（盲目）</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>？？？？？？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹盲目的是你</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我很多眼睛 看得可仔細ㄌ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>👀👀👀👀</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>可怕（戳瞎（（幹？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我咬死你🤬</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（變成超多灰塵（幹？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>得到你們的答案的青年僅是對你們笑了一下，接著繼續說：<br><br>「我們或許已經在這個世上不斷地輪回重生了千百次。」<br><br>「我們中的任何一個都可能成為受命運咒縛的『卡拉斯帕（Kalaspa）』。」<br></dd></dl>
+	<dl class="tc1 nc24"><dt>□世界的記憶</dt><dd>突然，你們感受到了世界被逆轉顛倒、崩塌重組——接著，水從地面溢出，嘩──地，你們便被無情地吞入了幽暗的深淵。<br><br>反轉，顛倒，天地在傾刻間倒錯，你們那在失重的世界裡沉溺於幻術的汪洋之中。<br><br>渴望地面的氧氣化作了細密的水泡，奮力衝向了天空，像是在追尋著那遙不可及的蒼穹。<br>在無數細碎的氣泡中，數百數千……甚至數億的影像瘋狂地流轉著。那是一切的縮影──其中有著人類的渺小掙扎，也有著被稱為怪物的詭譎畸變，映照著各種各樣的生命，與數不勝數的誕生與死亡。<br><br><br>那是，既美麗又怪異的風景。&lt;sanc0/1&gt;<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="FA">CCB&lt;=66 SAN (1D100&lt;=66) ＞ 71 ＞ 失敗</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="FA">CCB&lt;=58 SAN (1D100&lt;=58) ＞ 71 ＞ 失敗</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹 貼貼</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好貼</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>但是陸人不要再扣SANㄌ....</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>：D……</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc11"><dt>system</dt><dd>[ 森 陸人 ] SAN : 58 → 57</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>還來不及詢問成為「卡拉斯帕」會發生什麼事，以及陸人是否會受到影響，不穩的世界便已經將自己吃入其中。<br><br>潔白的羽翼反射性地擁緊懷中的人類，並張開其中一雙翅膀，試著帶人遠離潮水的襲擊。然而，攀附在羽毛上的水珠愈漸沉重，硬生生地將它扯進玄幻的景象，也因為畫面太過突然，它甚至以為陸人如那縮影一般逝去、離開了自己。<br><br>「嗚⋯⋯」緊張與不安的情緒瞬間令它低鳴了一聲，更加擁緊了重要之人。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>還沒問卡拉斯帕那是什麼意思就被突然過多的畫面和不可控的無力感感到不適，但在聽到擁抱自己的羽翼下聽到低鳴後，不只是被被擁抱著，同樣也是擁抱回去。</dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>在混亂的潮流之中，塔瑪什的聲音清晰的傳入你們的腦袋中。<br><br>「我們中的任何一個人都可能在前世犯下了罪，都可能崇拜過世界上的那些古老存在，或曾觸犯過它們。」</dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「我們不僅要懼怕此刻的覺醒，更要敬畏世上無窮的一切事物。這對你們而言也是如此──有些真相，是你們必須懷著恐懼去面對的。」</dd></dl>
+	<dl class="tc1 nc25"><dt>■記憶2</dt><dd>而在不停流淌的影像中，你們被其中一個畫面深深吸引——</dd></dl>
+	<dl class="tc1 nc25"><dt>■記憶2</dt><dd>兩個人隔著桌子，面對面坐著。<br>其中一人有著異形的姿態，另一人有著人類的姿態。<br><br>「你在寫什麼呢？——感覺很拼命的樣子。」<br>異形問道。<br><br>「我在想，怎樣才能和你在一起更久一點。」<br>人類回答道。<br><br>聽著這個回答，異形露出了稍顯孤單的表情，俯下身輕輕地握著人類的手。人類看上去也很傷心的樣子，也回握住了異形的手。<br><br>兩個人一定是彼此相愛的吧。<br>只是因為他們出生在了一個無法順利在一起的世界。<br>人類並沒有說想要一生和異形在一起。因為他知道，一定會發生什麼事讓他們無法永遠彼此相伴吧。<br><br>「如果有來生的話——我想成為和你一樣的人。」<br>異形低語著。<br><br>「我也是。如果有來生的話，我也想變成和你相同的樣子。」<br>人類回應著。<br><br>人類和異形互相擁抱，互相安慰著。<br><br>只是因為形態不同，他們的愛就無法被世界平等對待。那一定是一件悲傷的事情吧。<br><br>你們也這麼覺得。<br><br>正因為如此，你們也才注意到了。<br>這是你們無數次轉生中的其中一次。<br>眼前的那兩個人，那兩個靈魂，正是你們過去沒有結合的，悲傷命運的影像之一。<br><br>森 陸人，在過去，你也曾被稱呼為「異形」。<br>淵，在過去，你也曾被稱呼為「人類」。<br></dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd></dd></dl>
+	<dl class="tc1 nc26"><dt>□溺水</dt><dd></dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>被眼前的畫面震懾。<br><br>擁抱淵的十指不自覺的緊扣住，卻在用力的剎那擔心手下的白羽會因此刺痛而鬆開。<br><br>強烈的情緒在內心膨脹、激盪，彷彿熱油碰到水一般激烈。與畫面中相似卻反了過來的場景讓他混亂的思緒促使了腦袋的當機，傻怔怔地看著那場景中似乎不怎麼熟悉卻熟悉的異形，森陸人又看回了擁抱自己的「白羽」。<br><br>一向難以與他人共情的人，此時卻想到早期曾看過的偶劇，自己似乎就像那具被操弄的人偶一般，演出的內容卻不似仲夏夜一般歡樂，心底透著一股荒謬和悲涼。<br><br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>畫面中的他們——也就是他們自己。沒辦法真正在一起，這次也一樣會分離嗎？想到這裡，它靜肅的面孔落下淚珠，羽翼也纏緊懷中的人，因為曾經的愛意與別離感到哀傷，但同時也感覺懷中的人更加惹它憐愛。<br><br>這是它不願放手的寶物，是超過數千、數萬、數億次累積起來的情感，沉重，卻又令它陶醉不已，無法放手。</dd></dl>
+	<dl class="tc1 nc26"><dt>□溺水</dt><dd></dd></dl>
+	<dl class="tc1 nc22"><dt>塔瑪什</dt><dd>「那麼，本不該知道自己前世的兩人接下來又會前往何方呢？」</dd></dl>
+	<dl class="tc1 nc26"><dt>□溺水</dt><dd>你們能聽到那名青年的聲音。<br>隨後，那個聲音和消失在遠方的水泡一樣飄向了什麼地方，在話音落下後便無影無蹤。<br><br>周圍的景色完全變了，先前的幻象也跟著消失了。佇立在你們面前的荒涼草原上的，是一間廢棄的小屋。<br><br>然而你們腦中只有如同溺水一般窒息的感受殘留著，還沒能反應此時的變化。<br>同時，由於看到了本不該看到的東西，你們也在混亂之中思考著，自己究竟是什麼人。<br><br><br>被無法被抹去的恐懼襲上心頭　&lt;sanc1/1d3&gt;<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="FA">CCB&lt;=65 SAN (1D100&lt;=65) ＞ 72 ＞ 失敗</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>1d3 (1D3) ＞ 1</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="SU">CCB&lt;=57 SAN (1D100&lt;=57) ＞ 32 ＞ 成功</dd></dl>
+	<dl class="tc1 nc11"><dt>system</dt><dd>[ 森 陸人 ] SAN : 57 → 56</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>或許是被畫面給刺激到，一時之間森陸人也不顧兩人之間的差距、只想撥開羽翼仔細看看石膏像莊嚴的臉龐下的白羽。<br><br>而於此同時也不願放開對方。什麼才是重要？這是重要的？這是重要的。但為何、<br><br>「白羽……」手上的動作仍是撥著羽翼想仔細的看著他。<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>即使脫離水中，它羽翼的一部分仍像是被水攀附，沉重地垂落至地面，呈現如鳥類動物的姿態，矛盾、與石像材質截然不同，如嬰孩的哽咽更是從中心傳出，聽來無助且慌張。<br><br>「陸、陸人⋯⋯？」覆蓋上臉的羽毛像是融化一樣，明亮的白色不穩地向下滴落，如同淚水浸染下方的人類衣物。當它看見懷中的人模樣依舊，心中的錯亂與恐懼因而減緩，柔軟的翅膀恢復行動，輕輕上前纏住對方的手與腳，對他輕聲問道。<br><br>「它、它現在是⋯⋯什麼⋯⋯」</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>無法回應對方的問題，連森陸人都無法確定自己是什麼。<br><br>混亂的思緒只能在白羽慌亂無助下帶著求助的問答保持沉默，森陸人貼著溫熱而柔軟的羽翼，連最後一絲的理性都蕩然無存，一向沉穩而無動於衷的人，此時也恍然無措。<br><br>「……、白羽、你是……白羽。」沉默了許久，即使內心動盪，也無法放任，只能沈下嗓音直直的看向那彷彿尊嚴女性的臉龐，像是想看透下面的人影。<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「白羽。白羽。」嬰孩重複著，石像也如話語中的名字逐漸停止融化，那被攪弄在一起的模糊臉龐，漸漸重塑回三對羽翼，覆蓋住嚴肅與莊重的女性面容。<br><br>「還有⋯⋯陸人。」潔白的翅膀緩緩將人抱起，它貼近對方，以自己的臉頰輕蹭著男子，就像那段被尋回的夢中記憶一般，似是撒嬌，又似是安撫。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>還有、我。<br><br>咀嚼著、吞嚥了下去。<br>森陸人惶惶不安的心被簡單的話給撫慰，重要、而珍重地。<br><br>用被浸濕的衣袖，擦拭了被羽翼遮住的面龐，並回應白羽的親蹭，並在最靠近的羽翼上輕輕用唇親觸。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>靠邀</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>你要殺死我是不是</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>🤬🤬🤬🤬🤬🤬🤬🤬</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>🥺</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>不喜歡嗎🥺</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（幹啊</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>😭😭😭😭😭😭😭愛死</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我也要融化了 (已經</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>嘻嘻（妳他媽</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我大笑、烏鴉！！！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>貼在你身上（？（</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>對這珍愛的動作感到喜悅，嬰孩高興地笑了出聲，並試著仿照對方，但它比起唇部，似乎更想用羽翼來感受一切。數層羽毛在不知不覺間，已經將人團團覆蓋住，摟著對方的同時，輕撫著男子的臉龐與身軀。<br><br>「白羽，還記得。要找書。」不安很快地被滿足所取代，它想起了兩人旅程的目標，同時也是陸人想要的東西。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我融化在你們身上 (好黏</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（一起融化（ㄟ</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……」</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>因為白羽的話，而頓了頓後用鼻音輕輕應了聲，<br>帶著眷戀的同樣依靠在他身上，雖然不適應身上羽翼的觸碰，但並不抗拒的森陸人點點頭。<br><br>緩解了心底的情緒，視線開始轉移到唯一佇立在兩人附近的廢棄小屋。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>阿衍這樣算不算醜五（記錄（幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc27"><dt>■廢屋</dt><dd>廢屋很冷清。<br>從這間屋子老朽的情況來看，已經被廢棄了有相當長的時間了吧。<br><br>地板嘎吱作響，塗裝天花板和牆壁的牆紙也剝落了。好不容易在架子和桌子上找到了一些放著的東西，除此之外就什麼都沒有了。即使有也沒有任何用處。<br><br>桃色的光從敞開的窗戶外照射進室內，在這無人的空間中稍顯寂寞。<br><br>［可以探索的地方：書架/桌子］<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>不算吧😭</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>加回去了不能算🤬</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我已經算了來不及了😡</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>跟著陸人緩緩移動到小屋前，並舉起翅膀，仿照人類，在木作的門扉上輕輕敲了兩下才開門。<br><br>由於自己居住的地方十分簡單，它因此認為這樣的屋子或許也有人居住也說不定。於是，嬰孩邊說著打擾了，邊找到它的目標——書架，接著稍微加快速度往那靠近。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>帶著些許笑意的看著白羽的動作，見白羽去查看書架，森陸人則往桌子靠近。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>由於是廢棄的屋子，裡頭理所當然地也沒有任何人回應淵的敲門聲，不如說因為淵的動作而使的搖搖欲墜的門扉在發出了刺耳的摩擦聲後打了開來。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>□書架<br>書架早已褪色、佈滿了塵埃，到處都能感受到歲月流逝的痕跡。但是架子上的書卻被一本本排列得整整齊齊，應該還能閱讀。<br><br>淵可以進行 &lt;圖書館&gt;或者&lt;知識&gt;判定<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>按照RP順來給情報喔 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好！救命！（數值超低（ㄍ</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="FA">CCB&lt;=35 &lt;圖書館使用&gt; (1D100&lt;=35) ＞ 75 ＞ 失敗</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="FA">CCB&lt;=30 &lt;知識KNOW&gt; (1D100&lt;=30) ＞ 94 ＞ 失敗</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>救命！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>哇</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>還差點撞書架</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>等等讓老公來（嚕袖子（？</dd></dl>
+	<dl class="tc0 nc9"><dt>淵</dt><dd>🥺</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>挖 w</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>或許是巨大的羽翼晃動揚起了灰塵，頓時書架區域充滿大量讓人不適的粉塵，忍耐著不要打噴嚏(?)的淵一時無法好好集中精神去尋找有沒有陸人想要的書。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>□　桌子<br>桌上的東西很少，有一些文具和未使用的筆記本，還有一本有著很漂亮的精裝書。<br><br>打開書看，似乎是一本日記。<br>日記的內容是不是用日語寫的，但陸人會發現自己很不可思議的能讀懂那些文字的含義。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>唉唷好可愛</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>阿嚏！</dd></dl>
+	<p class="tc5 tab"><span>情報</span></p>
+	<dl class="tc5 nc5"><dt>ＫＰ烏鴉</dt><dd>▽某人的日記<br>xx/xx<br>和他分別已經過了多少年了呢。回憶尚未褪色，但是他的聲音我已經想不起來了。<br>我還不想忘掉他。<br><br>xx/xx<br>充滿著與他的回憶的東西越來越舊。它們逐漸破損、怎麼樣也修不好，我心裡同時有著這是沒辦法的事情的心情，以及為什麼不能更加珍惜的懊悔。<br><br>xx/xx<br>事到如今，我無數次地後悔那時與他的分別。為什麼那天我選擇了離別呢？雖然這已經是那時我們幾經思考彼此交談並選擇的最好的一條道路了，但是，這真的好嗎？<br>孤單與悲傷與日俱增。<br><br>xx/xx<br>他過的還好嗎？他會不會已經忘記了我，遇到了更愛的人呢？——只要你幸福的話，那一切都好。<br>不，我撒謊了。我希望和你一起獲得幸福。<br><br>xx/xx<br>如果還能與他相遇的話，那時候我絕不會再放開他。再也不會鬆開他的手。<br>即使種族不同，即使共同生活會十分艱難，如果還能與他相遇的話，我一定會創造出一個我們都能獲得幸福的未來。<br></dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>讀完後可以&lt;靈感&gt;</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>雞毛撢子(X</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="SU">CCB&lt;=85 &lt;靈感IDEA&gt; (1D100&lt;=85) ＞ 39 ＞ 成功</dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc5"><dt>ＫＰ烏鴉</dt><dd>讀完日記後，你不經意的環視了整個房間。<br><br>你注意到這是剛才你們看到的，異形和人類對話的那部分影像所在的房間。<br><br>那兩個人，最終還是分開了吧。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>這邊的靈感如果等等淵有來看日記也可以再骰 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！QQ</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>目前先密匿處理</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>……。<br>淺淺的呼了一口鬱氣，轉過身走去了白羽所在的書架，看著灰塵飄散，身軀一直抖動似乎再去在忍耐些什麼，看這樣白羽如此樣貌，不愉的心情也被那一抖一抖的羽翼給抖掉。<br><br>森陸人走上前替對方揮開灰塵，牽著羽翼也開始查看書架。<br></dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>陸人可以進行 &lt;圖書館&gt;或者&lt;知識&gt;判定</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「陸人，這裡髒髒。」出聲提醒的同時，它抖掉覆蓋在身上的灰塵，並乖乖地給人牽著乾淨的羽毛。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="SU">CCB&lt;=85 &lt;知識KNOW&gt; (1D100&lt;=85) ＞ 21 ＞ 成功</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好ㄟ！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>耶</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>待飄浮在空氣中灰塵不再那麼厚重，陸人試著翻閱書架上的書，後會發現那些書大體上已經老朽化而無法閱讀了。<br><br>但在那之中，你還是找到了幾本還能辨認內容的書。<br>其中有一本像是日記，最尾頁註記著『漢森·波普蘭』之名。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>翻開來閱讀的話，可以找到其中兩個比較令你們在意的內容。</dd></dl>
+	<p class="tc5 tab"><span>情報</span></p>
+	<dl class="tc5 nc5"><dt>ＫＰ烏鴉</dt><dd>▽關於卡拉斯帕<br><br>卡拉斯帕似乎是一個牧師的名字。<br><br>「我是在一本名為《赫斯坦記錄》的難以閱讀的文集中，瞭解到亞弗戈蒙（Aforgomon）的。文章說有一塊名叫赫斯坦的土地，似乎是另一顆行星，在很久以前的某個地方被四個太陽照射過。」<br><br>「那個世界的人崇拜亞弗戈蒙，尊其為『分秒與週期之神』和『時間之主』。」<br>「而當時，有一個名叫卡拉斯帕的祭司背叛了神。由於他的魯莽，他命中註定會與神對峙。」<br><br>「不過，這還不是全部，因為根據《赫斯坦記錄》所寫，卡拉斯帕註定永遠無法找到幸福，這個詛咒將貫穿他未來所投胎的每一世。此外他還被告誡，當充足的時間過去之後，在某個遙遠未來，他將再次見到亞弗戈蒙，屆時他會被從時間的洪流中完全抹去。」<br><br>「我很擔心這個故事是真的。我們中的任何一個人都能在這個世界上轉世了一千次。我們中的任何一個都可能命中註定地成為卡拉斯帕。」<br><br>「我們中的任何一個人都可能在前世犯了罪，都可能曾崇拜世界上的那些古老存在，或曾觸犯過祂們。我們不僅要害怕今生，還要害怕所有將至的無窮的生命。」<br></dd></dl>
+	<dl class="tc5 nc5"><dt>ＫＰ烏鴉</dt><dd>▽關於幻夢境<br><br>各種各樣神話的魔導書中都多多少少有著對幻夢境的提及。幻夢境被認為是魔術和冒險的幻想領域，最熟練的入夢者可以在入睡時或在幻夢境居民的帶領下進入幻夢境。恐怕那是兼備了一切的另一個次元吧。<br><br>幻夢境是不為人知的怪物們的故鄉。當中雖然有冷族人（Men of Leng）、卡拉卡爾（Karakal）等生物棲身於此地，但是據說也有因為數量稀少而沒有種族名的怪物存在。<br><br>雖然無法估算這些生物對人類會產生何種影響，但既然是記載於魔導書中的存在，就不能輕易忽視。想要和幻夢境斷絕聯繫，就只能封鎖或者破壞和幻夢境相連的入口吧。如果這麼做了，這個入口就再也不會與幻夢境連接。<br></dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「卡拉蘇、卡拉斯帕。」找到塔瑪什所說的人，它迫不及待地與陸人分享，一只羽毛輕柔地指著那串文字。但隨著閱讀後續的內文，它得知了這個人的身份與命運，並擔心起那數億次的回憶是否即將來到尾聲，遭遇亞弗戈蒙，自此消逝。<br><br>但是，故事的悲劇主角只有一人，他們不一樣。他們擁有彼此。<br><br>「白羽，保護陸人。」它放下了嬰孩柔弱的形象，用輕柔但充滿決心的語氣這麼說道。微微晃動圍繞在陸人四周的羽翼，又掀起一些粉塵。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>阿衍我們先晚安囉！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>阿衍晚安 !</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>……按照白羽所說的，卻無法安心釋懷帶著隱隱的擔憂，但對上淵白羽輕柔包圍著的羽翼，森陸人暫且閉上雙眼，點點頭。<br><br>「有你。」沉默許久，連空氣飄散的灰塵都飄落。如果他是卡拉斯帕那他會纏着白羽直至結束。反之，怕也會繼續纏著吧。<br><br>想不到的、沉重得連森陸人都想不到的情感卻意外被白羽安撫下來。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>抱歉……久等了TT</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒事辛苦了！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（大摸一把陸人</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>辛苦了TT</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>靜靜地等待陸人給予自己回應，而嬰孩的笑聲如預料地再度響起。它看著閉上雙眼的男子，羽翼輕柔地撫摸他的眼邊。<br><br>「我們，在『幻夢境』相遇。」<br><br>「夢裡，可以繼續旅行。一直一直睡下去，就不會結束了。」得到新知識的它這麼說著。也憶起彼此在此世相遇時，那橘紅色的天空、溫和且不被打擾的世界，要是可以居住在那裡，說不定就不用擔心任何事情了。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……。」幻夢境？<br>閉著眼沉思，夢境？現實？<br>一瞬間，森陸人也被羽翼所說的樣貌給吸引，不會醒來的夢聽起來過於夢幻而不敢相信。<br>但……<br>睜開眼，森陸人看向了白羽溫柔的羽翼還有他身上的「異色」，搖搖頭。<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>我倒及愛</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>你到家了 !</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>嗎 (</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>！歡回！</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>到家！我等等沖個澡就上拍謝我欠你們好幾張圖😭😭😭</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>對wwww</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>到家了 烏鴉好厲害看懂亂碼（</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒事我也慢慢ＲＰ！🫡</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>阿衍慢慢畫圖！（幹？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>送圖暗殺你</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我等著被暗殺😡（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「陸人，不喜歡在夢裡？」看見對方搖搖頭，也睜開了雙眼，它的羽翼有些疑惑地在他的臉上游移。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>ｗｗｗｗｗ那你慢慢畫圖換我去洗澡（欸</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「喜歡。」 搖搖頭，否認。<br>如果進了夢中，快樂但…………<br><br>「夢裡只有馬刺木，但現實會有更多，我想要你看到。」就像老院長帶森陸人認識讓他對自己更深的理解，他希望白羽也可以。<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>或許是還沉浸在睽違許久的重聚中，認為只要有陸人陪伴便足矣，它對於這個理由感到不解。沉默片刻後，稚嫩的聲嗓很快便重新響起。<br><br>「只要陸人一起的話。」柔軟的羽翼再次撫摸男子的臉蛋，答應與對方一起醒來。<br><br>「桌上，還有書。」說著說著，便緩慢地朝書桌的方向移動，似乎還想知道更多事情。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>想看書可以進行 &lt;圖書館&gt;或者&lt;知識&gt;判定</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="SU">CCB&lt;=35 &lt;圖書館使用&gt; (1D100&lt;=35) ＞ 15 ＞ 成功</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>wow！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>看阿衍要不要一起骰</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>啊，不對我看錯阿阿</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>看書不用判定抱歉，等等給你的下一個判定加成+10%</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>！豪感謝！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>淵發現自己也能讀懂那本日記，在細細的讀完後，你若有所思。<br><br>可以＜靈感+10%＞</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>CCB&lt;=80+10 &lt;靈感IDEA&gt; (1D100&lt;=90) ＞ 18 ＞ 特殊</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>讀完日記後，你不經意的抬頭看向了你們所在的房間。<br><br>你注意到這是剛才你們看到的，異形和人類對話的那部分影像所在的房間。<br>那兩個人，最終還是分開了嗎。<br><br>日記本主人，肯定也是曾經居住在此的你們之中的一人，在與對方別離後所寫下的吧。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「一起。」回應著白羽在臉龐的輕觸，說著。並跟隨對方來到書桌並陷入思緒。 <br><br>在看了日記的反彈其實連他都不知道這個答案是否正確，但如果有復活咒文，勢必有更多他所未知的東西，說不定更能找到永遠一起生活的方法。<br>就像此世他們斷開了聯繫，又如何得知不會有下次。<br><br>他不信任。<br><br>「……一起。」<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>後悔的情緒彷彿透過筆墨傳遞了過來，使它得知自己正身在其中一場悲劇的終末地。它無法理解曾經的自己為什麼會同意這種決定，又是怎麼認為這是最好的道路？<br><br>「⋯⋯嗚。」羽翼緩緩爬上了陸人的掌心，嬰孩嗚咽了一聲，將人擁抱在自己懷中。<br><br>「恩。陸人，不要再離開白羽⋯⋯無論如何都不要。」</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>沒有脫離、不想脫離，也不會脫離。<br>森陸人依靠在白羽的懷裡，說是白羽依靠自己更感覺是自己在倚賴白羽。<br><br>或許是認識了白羽想起此世幼時隨時都能依靠白羽的摸樣。<br><br>「……永遠。」<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「恩，永遠。永遠。」它巨大的身軀整個包裹著陸人。過去沒能做到的，就靠今生來彌補，便再也不需要來世與前世，僅留此身就足夠。</dd></dl>
+	<dl class="tc1 nc17"><dt>■</dt><dd>突然，外面傳來了巨大的響聲。<br>隨即傳來的是樹木沙沙作響的搖晃聲和生物們四處逃竄的聲音。<br><br>你們慌張地走到外面來確認，發現有點遠的地方冒著煙，很明顯那裡發生了什麼事。</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「⋯⋯危險。不要去。」看見遠方的黑煙，以及聞見生物逃竄的聲響，令它拉高警戒，也下意識地想帶陸人躲回屋子裡。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>下意識地也拉住了白羽的羽翼，跟著白羽往屋子的方向躲。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>然而，爆炸聲並沒有隨著你們的躲避而停歇，反而越演越烈，聲音也有逐漸靠近的趨勢。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>劇烈的震波搖晃著整棟房子，原本就搖搖欲墜的建築更是開始發出吵雜不安的聲響，木頭結構互相摩擦著，剝落的碎屑掉落在地。<br><br>書架上的書本也因震動而位移，你們待在不知還能撐多久的屋內，震動有時震耳欲聾，有時連綿不絕，像是有人正在用力地搖晃大地。</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>迅速地用柔軟的羽翼遮著陸人的頭部，抵擋上方掉落的碎屑，隨即乾脆將人整個抱起、包裹起來，任憑木屑灑落在自己的身軀。<br><br>「屋子也，危險⋯⋯」它擔心要是房子垮掉，陸人會被波及，於是抱著人移動到門口，想確認外面爆炸聲的去向。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>森包裹（？？？？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>羽BER Eats！（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc2"><dt>阿衍</dt><dd></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>醜六！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>被包裹著搖搖晃晃，雖然看不見外頭但爆炸聲不絕於耳。溫暖柔軟的環境仍讓森陸人眉頭擔憂地緊皺。 「外套、記得披在自己身上。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>好好吃。（？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「不行。會壞掉。」果斷地拒絕，不論外套還是小花都好好地保護著。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>幹已經要畫畫了還要算嗎</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>😭</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>WWWWW</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好那我不算ㄌ（幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「我會再給妳新的。」陸人皺著眉「我會……難過。」男人有點難以啟齒但顧不得那麼多。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>親一口陸人</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>耶（好像輸了但算了（ㄍ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>大笑</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>親一口寶貝</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「唔⋯⋯白羽、披好外套了。」對於要弄壞陸人給自己的禮物，它仍顯得不太情願，掙扎片刻後仍是乖乖照做，因為它更不希望對方哭泣。<br><br>默默地把羽翼中的衣物往外推，讓一部分的外套顯露在外，同時，裹著陸人的羽毛也溫柔地撫著陸人的臉龐，似乎是在安慰對方。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>＆這邊往外看會看到什麼ㄇ！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>濃煙跟 蘑菇雲...?</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>救命ㄚ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>這邊可以待到爆炸停止嗎（...</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>wwwwwwwww</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我可以說，你們可以繼續待在這，然後爆炸就會自己來找你們了。代價是房子會垮 (??</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊啊啊啊啊</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好吧我把陸人帶出去（</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>很不幸的，挖戰溝也會是上述的結果 ((幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊啊啊啊啊</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>人家充滿回憶的小屋......</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>如果我說今天你們繼續RP我先去睡，你們會不會失眠(幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「乖。」再次用唇輕觸臉龐的羽翼。聽見爆炸越來越接近，些微冷靜下來的森陸人皺眉「白羽，去外面看看吧看有沒有其他躲藏的地方。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>WWWWW</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>QQQQQQQ</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>Qqqq</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>目前你們的意向是，找地方躲起來嗎 ?</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>對！</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>對的</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>你們可以RP想怎麼做+行動，我再來幫你們描述</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好！我來Ｒ個</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>&amp;我明天再來接，先睡了抱歉各位 (</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒問題晚ㄤ！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>沒問題謝謝烏鴉晚安！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「好⋯⋯」為了不讓陸人被波及，它維持這樣的姿態抱起他，並迅速往門口移動，打算尋找與爆炸聲相反的位置躲避起來。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>你們離開了廢屋，在荒涼的草原上四處尋覓著能讓人躲藏的地點，然而草原一望無際，你們只能盡量遠離看起來逐漸枯萎衰敗的景色快步前進。<br><br>爆炸聲此起彼落地響起，有時像是離的很遠，有時卻感覺近的就像在身後，震動透過土地和空氣傳遞至你們身邊，時時提醒著異變正在發生。不安逐步累積在你們的心頭，而你們則不禁想起了日記裡提到的，終將被神所抹去的『卡拉斯帕』。<br><br><br>然而，就在此刻。<br><br>一陣颶風挾帶著濃厚的白霧從一側朝你們襲捲而來，在躲避不能的情況下才發現，那籠罩包圍你們的，是不知何時已經靠近到咫尺的、爆炸造成的濃煙。<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>即使用最快的速度遠離爆炸，不妙的聲響仍然在自己未能留意到的瞬間來到附近。<br><br>「陸人、抓緊⋯⋯！」當黑煙包圍自身，圍住人類的羽翼緊張地抓緊陸人，其餘的翅膀則高高豎起，警戒著周遭。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>對於巨響明顯感到不適，摀著雙耳警戒的四處張望擔憂會有事物靠近。。<br><br></dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>周遭遲遲都是被煙霧包圍，明明是白天卻伸手不見五指。<br>最終，淵搧動巨大的翅膀一面試圖吹散周身的霧霾，一面保護著懷裡的陸人不被煙霧侵襲，用著盡可能快但又不傷害到人類體質的速度帶著你們兩人衝出濃煙。<br><br>你們終於通過了那片帶著火藥味和土壤氣息的煙霧，接著，出現在你們面前的是一條巨大的、橫穿地面的裂縫。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>「哇！這時機真是不巧……」<br><br>從上方傳來了這樣的聲音。你們向那邊投去視線，看到了一個紮著紅色雙馬尾，像少年又像少女的人。他漂浮在空中擔心地看著這邊，但映入他視線的卻不是你們，而是裂縫的另一側、煙霧消散的方向。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哇！！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc28"><dt>???</dt><dd><br>「我的力量只夠守護這個地方而已，怎麼辦才好呢、只能到此為止了嗎……」</dd></dl>
+	<dl class="tc1 nc28"><dt>???</dt><dd>「接下來的事就交由你們來決定吧——他一定會幫助你們的。」</dd></dl>
+	<dl class="tc1 nc29"><dt>□交界的裂縫</dt><dd>像是在喃喃自語，又像是在對誰說的，在話語落下後，他如水中優游的魚一般，在空中輕盈地翻身、飛向裂縫的另一側。<br><br>待煙霧散盡，你們也終得以看到裂縫對面的景象。<br><br>分為這一側與那一側的，在裂縫的對岸，出現了如同玻璃破碎一般的巨大裂痕，從那中映照出了兩個人類的身影。在他們身後的是廣闊茂密的森林，直覺告訴你那裡就是現實世界了。<br><br>那兩個人類似乎發現了你們的存在。其中一個人看到森 陸人時，露出了驚訝的表情——那正是你們曾在黑暗中看到過的少女。她朝著你打著招呼，在裂縫的另一邊，向你伸出手。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哇好多人！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「森 陸人先生！已經沒事了！快過來這邊！」</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>緊接着，他旁邊的另外一個人對著剛才飛過去的少年開始唸起咒語。對你伸出手的那名女性繼續接著話。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>？我又要再見了？（幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「我們上山是為了來尋找失蹤的森 陸人先生的——再次見面了的話，你應該就能相信我們了吧！」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>真的好多人</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「這裡不是人類該待的地方！而且馬上就要崩塌了，趁現在還能越過這條裂縫，快點過來吧！我們會接住你的！」</dd></dl>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「快來！我們一起回去吧！」<br><br>朝森 陸人拼命伸出的手並沒有帶著任何惡意，承載著的只有這份想要幫助他人而拼命努力著的心意。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他對他唸咒！！！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc30"><dt>▼</dt><dd>該怎麼辦呢？你面對眼前的善意和現狀，卻無法掩飾己身的困惑。<br>在你剛理解情況、還沒來得及做出決定之前，突然，隨著劇烈的搖晃，地面又再次裂開了一道巨大的裂縫。<br><br>可能是站立的位置太過脆弱了吧，伴隨著「啊、」的一聲，淵就這樣突然的被拋到了半空中，向下墜落。<br>與此同時，你意識到他落到了你手臂觸碰不到的地方。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊啊啊啊啊啊啊</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「就趁現在！快跳過來！」<br><br>那個少女仍然朝著你，拼命地伸出手。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊啊啊啊啊啊啊啊啊啊啊啊</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>寶貝阿阿阿阿阿阿阿阿阿啊</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好了 可以開始RP了 (躺回沙發上)(幹</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（繼續尖叫）</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（尖叫聲</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>洛本救命啊！！！！！（</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>腳下懸空，它在自覺失衡、落下的前一刻，趕緊推了一把懷中的人，讓對方得以站在地面上，自己卻也因此下墜到深處。<br><br>「陸人⋯⋯」望向上方的光源，它再次伸出巨大的翅膀，緊緊攀附在牆面上。潔白的羽翼迅速地融化以嵌在縫隙之間，將自己巨大的身軀固定住，並試圖往上爬到陸人的所在。</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>儘管淵迅速地做出了應對，但因爆炸而變得脆弱的岩壁卻似乎沒辦法承受淵的重量，土石肉眼可見的從羽毛的縫隙流失，支撐著淵的壁面正在逐漸的鬆動，你能感覺到自己龐大的身軀正一點一滴的往下滑落。<br><br>不如說，那種感覺就像是裂縫之下有「什麼」正在吸引著你的身軀。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>什麼東西什麼東西什麼東西？？！！！！！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>救命ㄟ！！！！！！！！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>可能是烏鴉的胃袋吧 (??</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>烏鴉！！！！！！！！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>O＜O</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹幹幹幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>因巨響和不斷變化的環境而感到焦慮，被白羽帶著穿過煙霧，依靠著環抱著自己身體的溫暖，森陸人仍是被種種刺激的閉目屏息。<br>重新睜眼後發生的事仍令他負荷過重，焦慮還未充分緩解並理解此時此刻，森陸人一瞬間的失重又回歸地面，又看到白羽掉下去的那瞬……根本無法顧及其他。<br><br>「淵——」眼前女子對自己的善意、其他狀況根本入不了眼。<br><br>森陸人看著白羽墜落在自己碰觸不到的地方，焦急的四處張望看有沒有東西可以讓白羽攀著上來。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>烏鴉！！！！！</dd></dl>
+	<dl class="tc0 nc12"><dt>巨大的烏鴉</dt><dd>O＜O</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>啊！！！！帶我們飛！！！！（？</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>帶我們飛</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（想到海底總動員的鵜鶘（？（</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>然而周遭僅是荒蕪一片，有的只是巨大的裂縫與不斷朝你叫喊著什麼的男性和女性的聲音而已。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>讚ㄟ（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（拉舌頭當煞車（？？？</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「......人先生！快......要關.......來！」</dd></dl>
+	<dl class="tc1 nc31"><dt>男性探索者</dt><dd>「......要撐不.....再這樣.......不及......」</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd><br>「喀啦」<br><br>連帶著攀附的石塊，淵的羽毛嵌合的牆面發出了不堪負荷的聲響，再次的，將淵的身影帶往了下方無法窺視的深淵，刺眼的白色身影就像是異物一樣成為那片黑暗中難以抹去的幽影。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>靠腰</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>不嘻嘻</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我太重ㄌ.........</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>以後減肥：（</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（瘋狂慘叫（咳嗽</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹啊才不是寶貝問題</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>你憋著（？？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>是岩石太脆弱</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>另一方是和飄浮在空中的青年周旋與朝這邊吶喊的、踏過現實而來的族人，<br><br>一方則是曾相伴自己度過無數輪迴與夢境的另一半，<br><br>你赫然明白，<br>若是此刻不朝任何一方伸出手，自己將會就此被拋下，成為孤獨世界中的獨自一人吧。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>撐不住寶貝</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>(搖旗吶喊</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（瘋狂尖叫（</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>快過來快過來！！！（幹</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>料理東西軍 ! (不對</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「陸人，它、上不去⋯⋯」順著掉落的方向留下白色的軌跡，碎石不斷崩落的聲音提醒著它，已經無法向上爬行。<br><br>於是，它放棄攀附於牆邊，改而高舉翅膀，想要抓住重要之人的手，想要跟對方待在一起。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>在淵掉下去的那刻、眼中只剩下那抹幽影。<br>一瞬森陸人想到了淵帶著童稚嗓音的『一直、一直一起睡下去，不結束。』<br>也恰時邊緣的岩石碎裂一角，往時僅會有些不穩的重心，卻像是給了森陸人動力一般，任憑重心偏移跟著下墜往那抹幽影前進，而手也是向前擁著想要接觸熟悉的溫暖。<br></dd></dl>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「───！」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>來了（欸</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>紅白大賽（？）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>白組勝利！（？？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>嗚呼！！！！！！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc16"><dt>女性探索者</dt><dd>「───森先生！」<br><br>在森 陸人的身姿傾斜的那一刻，視野的一角映出的大約是露出驚慌表情的兩人朝你伸出手的模樣吧。<br></dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd><br>但、<br><br>那都不重要了。<br><br></dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd><br>你們的身姿順應著引力，朝裂縫的下方不停下落著。<br><br>伸出的指尖和最末端的羽翼終於在空中相觸，<br>取代失重的不安感，你們緊緊的抓住了彼此。<br><br>像是你們拋下所有，<br>而不是世界拋下了你們一般的，<br>一黑一白的身影雙雙落進了深不見底的、世界的縫隙之中。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>突然變成黑白大戰了雖然不是大戰</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（？）</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc32"><dt>■抉擇</dt><dd>取代一直沒有迎來的劇烈撞擊感，冰涼的氣息包裹住了你們，緩和了落下的衝擊。<br><br>不可思議的是，你們並沒有覺得呼吸困難，而你們呼出的空氣也沒有產生水泡。你們只是被液體溫柔地包裹著全身，緩緩地下沉，不斷地向深處沉去。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我們沒有要大戰！！（？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>雖然很突然 但這裡可以小R</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「接到了、接到了。沒事了。」嬰孩雀躍地笑著，羽翼緊緊地抱住迎面而來的陸人，再次重逢的喜悅令它高興得忘了探究自己身在何處。不管如何，都沒有彼此待在一起還要重要。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>被熟悉的溫度擁著，或許是剛剛的場景。<br>似乎終於認清想法，對於淵開懷的聲音也同樣感到喜悅。<br><br>「嗯，沒事，永遠一起。」森陸人帶著淺笑低低的說著，帶著說不出的重量。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我去個廁所！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>那我繼續ㄌㄇ !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>回！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我這邊OK！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>我也可以！！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc33"><dt>□生與死之神</dt><dd>不知道過了多少時間，在漸漸變深的黑暗中，包裹著你們的水慢慢地消失了。<br>那感覺像是一瞬間，也像是已經過了很久很久。<br><br>「嘩啦」一聲，<br>當你感覺自己的面孔破開水面時，下一秒就已經穩穩地站立在水面之上了。<br><br>環顧四周，只見一片濃稠如墨般的暗海綿延開來，天空中看不見月光，也沒有半點星辰，完全感受不到任何生命存在的氣息。&lt;SANC/1/1d3&gt;<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd class="SU">CCB&lt;=64 SAN (1D100&lt;=64) ＞ 57 ＞ 成功</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd class="FA">CCB&lt;=56 SAN (1D100&lt;=56) ＞ 95 ＞ 失敗</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>1D3 (1D3) ＞ 1</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（擦汗擦汗</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc11"><dt>system</dt><dd>[ 森 陸人 ] SAN : 56 → 55</dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd>「真虧你們能來到這裡。辛苦了。」</dd></dl>
+	<dl class="tc1 nc17"><dt>■</dt><dd>一道清冷的嗓音自你們的身後傳來。<br><br>回頭看去，你們發現水面上站著一名陌生的青年。<br>但那近乎透明的蒼白肌膚和漆黑的眼睛和你們在森林裡見到的少年十分相似。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>哇好多人！！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他好好看ㄛ...</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我覺得或許可以在這裡小R</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒問題！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好好看……想進他斗篷……</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>不然等等他就不打算聽你們說話了 (啊</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>ㄟ！！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我大老婆 謝謝 (ㄍ</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好 猜錯了（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>欸！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>還以為是洛本！！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>對 W</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>大笑</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>我有看到你的噗wwww</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒想到是我不知道的名字！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>然後我剛好暫離一下</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>草</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「是你、幫助它們的嗎？」感覺對方似乎沒有敵意，便想起粉色青年所說的話，摟著陸人的羽翼稍稍放鬆下來。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>沒有說話，只是摟著淵看向面前的青年似乎也沒有太大敵意。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>然後喜歡這裡的BGM,好讚……</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd>「......我不知道洛本有什麼打算，但對於紀錄之外的異數──我無法容許人類在此久留。」<br><br>然而青年沒有正面回答的這麼說，接著將手裡那本巨大厚重的書冊展開，另一隻手提起筆，銳利的眼神筆直地注視著你們。</dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd>「我不像洛本是個無藥可救的老好人，也不像塔瑪什那樣和藹可親。所以，我只會問一遍。」<br></dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd>「馬上我就會將這個空間和現實完全割開，切斷連接的道路。如此，你們此生再次相遇的可能性幾乎等於沒有。」<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>靠腰</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>不行切</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>不准切</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>😭</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>😡</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>不會理wwww</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「不可以。為什麼要這麼做？」雖然面容依舊毫無變化，但嬰孩提高的聲嗓似是鬧著脾氣，翅膀也隨之高高聳起。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>聞言，森陸人緊緊地用手摟住白羽緊皺著眉頭。「不要切開我們。」</dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd>即使你們問了他問題，或向他抱怨，他好像也並不準備回答，繼續這麼說道：<br><br>「但，我會給你們選擇的權利。」</dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd><br>「其一。我會從幻夢境的名錄中將淵的名字抹去。即，捨棄幻夢境、選擇在人類社會生活。」<br></dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd><br>「其二。我會將森 陸人的名字寫進幻夢境的名錄。即，捨棄人類社會、從此在幻夢境生活。」<br></dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd><br>「其三，也是最後一個。」<br><br>「我不會將幻夢境名錄中淵的名字消除，也不會記入森 陸人的名字。也就是說──即，選擇別離。」<br></dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd><br><br>「現在、做出選擇吧。」<br><br><br></dd></dl>
+	<p class="tc2 tab"><span>秘密(M.W.,阿衍)</span></p>
+	<dl class="tc2 nc5"><dt>ＫＰ烏鴉</dt><dd>▼給HO探索者的秘密情報<br><br>因為你曾經是異形，所以你清楚這一點——若是在人類社會生活，那一定會十分艱辛。<br>淵會因為外表和其他人不一樣而被害怕，或許也會受到暴力的對待吧。今後，作為與他一起生活的人，你該怎樣才能排解他只能依靠自己的寂寞呢？<br><br>不安感化為絲線，今後也將永恆不斷地編織吧。<br>所以那個時候，你們才會選擇了離別也說不定。<br><br>但是，即便如此，想要在他身邊的心情是不會說謊的。如果輕易地放棄當時盼望已久的夢想的話，肯定會後悔的。<br><br>如何選擇，這是你的自由。<br></dd></dl>
+	<p class="tc3 tab"><span>秘密(M.W.,赤Seki)</span></p>
+	<dl class="tc3 nc5"><dt>ＫＰ烏鴉</dt><dd>▼給HO神話生物的秘密情報<br><br>因為你曾經是人類，所以你清楚這一點——若是在幻夢境生活，那一定會十分艱辛。<br><br>森 陸人會因為外表和其他人不一樣而被害怕，或許也會受到暴力的對待吧。今後，作為與他一起生活的人，你該怎樣才能排解他只能依靠自己的寂寞呢？<br><br>不安感化為絲線，今後也將永恆不斷地編織吧。<br>所以那個時候，你們才會選擇了離別也說不定。<br><br>但是，即便如此，想要在他身邊的心情是不會說謊的。如果輕易地放棄當時盼望已久的夢想的話，肯定會後悔的。<br><br>如何選擇，這是你的自由。<br></dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「……二，好嗎」森陸人給出了回應，但眼神是看向淵。「永遠不醒來，好嗎？」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>ㄟ？！你給我等等ㄟ！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（搶）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>ㄟ！！！！！不可以！！！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>我也要講話（掙扎）</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好好笑好</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>沒啦只是問…………</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>你繼續你繼續……</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>&gt;:(</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好&gt;:(</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>🥺</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>白色的石像聽聞三項條件，靜默片刻，隨後面向懷中的人，準備開口，卻沒想到陸人先一步說出了選擇。<br><br>「⋯⋯可是，陸人，不是想要帶它、帶白羽去看更多的花嗎？所以，它要一起出去。」羽翼輕輕地撫摸對方的臉頰，它輕聲說道。<br><br>「不過，亞弗戈蒙，有辦法來到幻夢境，或是人類世界嗎？」重新看向陌生的青年。</dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd>「萬物皆會走向終結。即使不願，也終會回到世界的根源。」他語焉不詳的回答，但眼中更多的似乎是不明白你們這麼問的疑惑。</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「唔⋯⋯」聽起來似乎不論躲在何處，卡拉斯帕都無法逃過與亞弗戈蒙相見的命運。這令它十分擔心，卻也更加篤定了要跟陸人待在一起的願望。它重新低下頭，向懷中的人說道。<br><br>「⋯⋯吶，陸人。這裡，不適合不再做夢的陸人。」<br><br>「人類，雖然會害怕它，遠離它。但只要有陸人在，白羽就滿足了。而且，它還想幫陸人找書。」</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>幹對ㄟ突然想到死靈之書問這位才正確吧www</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>ｗｗｗｗ問之前那位也沒甚麼問題啦其實</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>感覺問塔瑪什才會真的回答我們（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>（阿衍還在，阿衍在試圖通靈等我一下）</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>好沒問題！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>超好笑感覺問這位他會無視我們</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（正想說要不要呼叫你（？</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>對www</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>ㄟ　對　（</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>有我還醒著！！前面被嚇醒了……（欸</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>啊wwwwwwww</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>掉下去 很恐怖欸（？？？？</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>原來是那裡啊www</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc2"><dt>阿衍</dt><dd></dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>「但人類，也不適合你。」森陸人也抬頭望向對方一字一句的慢慢說著。「有你我也、足夠滿足。」<br><br>心裡坦然的說著，前面他或許還帶著猶豫，但在剛剛看著淵墜落時的重量還有如今兩人相擁的安穩感都不曾體會。<br><br>而聽到淵和青年的談話，或多或少都有猜到或許不管到哪如果兩人是卡拉斯帕那不管如何都逃不過。<br><br>也因此森陸人此刻在乎的僅僅是淵的感受「你習慣夢境，……爺爺也會體諒。」<br><br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>醜....</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>七...（幹</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>😭</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>幹啊</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>殺人</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>&gt;&lt;</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>滅……口……</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>wwwww</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>爺爺救我........（...</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>爺：（揮手再見</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>「⋯⋯陸人，真的不想出去嗎？在這裡的時光，會很長很長⋯⋯」撫著陸人的羽毛停留在眼側，將深色的髮絲撥開。望著與自己差異甚高的雙眼，它思索片刻，再次確認對方的意願。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>閉上眼認真思考，並將頭靠上石膏像的胸前片刻後，點點頭並回看著視線的來源。「白羽一起，很好。」</dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>輕柔的笑聲自石像中心傳出，它收緊圍繞在陸人身上的羽翼，將人珍惜地抱在懷裡。即使想到今後或許會發生的挫折，它也欣然接受，只因總算能如願待在重要之人身邊，在數萬、數億次的嘗試寫下快樂的結局。<br><br>「恩。白羽會保護陸人。一直一直。」<br><br>「它們，要待在夢裡。不醒來了。」向一旁的人說道。</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>不醒來ㄌ！</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>睡覺</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>確定睡覺！（？</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好夢好夢zZZZZ</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>豪！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>gogo！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc35"><dt>■尾聲</dt><dd>我們的故事，到結束為止都是命中註定的。<br>如果我們命中註定要變成這樣，那真的是太悲哀了。<br><br>但是，這也一定不是什麼壞事，只是一個選擇的結果罷了。不存在最完美的答案，存在的僅僅只是選擇的道路。<br><br>小小的孩子大聲哭泣著。<br>巨大的存在輕聲問詢著。<br><br>「你遇到了什麼傷心的事情麼？」<br><br><br>說起來，那孩子回答了什麼呢？<br>但能確定的是，從那時起，小小的愛便開始萌芽。<br><br><br>該如何是好呢——這份刻骨銘心的愛。<br></dd></dl>
+	<dl class="tc1 nc36"><dt>END-A2：以愛為食</dt><dd>---</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>沒事我什麼都沒看到！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>阿阿</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>（遮住眼睛</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>笑死我也是！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd>你們決定共同在幻夢境生活下去。<br>聽到這樣的回答，青年的神色依舊，既不見喜悅也無悲哀，僅是淡淡地吐露了一句：<br><br>「是嗎。」<br></dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd><br>「那麼，我就將森 陸人作為新的住民加進幻夢境的名錄吧。」</dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>黑髮的青年這麼說著，風便吹了起來，他手中的書頁發出「颯颯」的聲響不停地翻騰著。當名錄在某一頁停下，青年將手按在書上，開始低低吟詠起咒文。<br><br>那是你們聽不懂的語言。不過，那應該就是為了將森 陸人的名字編織進幻夢境的世界而唱的吧。<br></dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd>「即刻起，你便正式成為幻夢境的居民了。——以佐 ‧ 卡拉爾的名義，我會許諾對你的庇護。」<br><br>他轉過身去，用左腳輕輕地踏了一下水面。就在這時，周圍的液體好像突然有了意志似的動了起來，將你們包圍其中。<br></dd></dl>
+	<dl class="tc1 nc34"><dt>佐·卡拉爾</dt><dd><br>「我會祝福你們所擁有的決心。」<br><br></dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd><br>最後，<br><br>你們的意識在黑暗中漸漸消融。<br><br><br>---------------</dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>他祝福我們欸</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>他人很好ㄟ..........</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好好喔（突然暈（幹</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc37"><dt>□甦醒</dt><dd>......<br><br>從岩壁的縫隙中照射進來的陽光落在洞穴內。你們能夠得知現在已經是早上了。<br><br>意識逐漸清醒過來，你們一邊揉著惺忪的睡眼一邊起身。你們發現這裡是淵的住處。<br><br>目光所及之處的是你的重要之人。<br>你們看向彼此，意識到對方的存在和姿態，確實真切地存在於此。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>你要跟烏鴉爭奪大老婆（幹</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>好好笑</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>可以RPP !</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>這邊R完就結局了 !</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！！</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>豪！！！！</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>可以慢慢R ! 好了可以DC跟我說我貼結局</dd></dl>
+	<dl class="tc0 nc5"><dt>ＫＰ烏鴉</dt><dd>或是我們就下次結局+說明一起 !</dd></dl>
+	<dl class="tc0 nc2"><dt>阿衍</dt><dd>好！！</dd></dl>
+	<dl class="tc0 nc0"><dt>赤Seki</dt><dd>豪！</dd></dl>
+	<p class="tc1 tab"><span>メイン</span></p>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>睜開眼，第一瞬間是看向白羽尋找她的存在。<br><br>心底還迴盪著剛剛那人的祝福，森陸人靠向白羽自己進入白羽雙翼環繞的範圍。<br>不發一語，但下垂的眉頭，顯示出森陸人愉快和放鬆的姿態。「早安，白羽。」<br></dd></dl>
+	<dl class="tc1 nc9"><dt>淵</dt><dd>聽不懂的咒文就像是祝福它們的祝禱，即使黑暗再次湧上視野，白色羽翼中的溫暖這次卻沒有散去。滿溢於內心的平靜，令它高興得再次陷入深邃的睡夢之中，不再害怕。<br><br>當光線再次照映在自己身上，柔軟的羽毛下意識地摩挲、撫著懷中人，當它意識到願望如同美夢一般實現，洞穴很快便迴盪嬰孩歡喜的笑聲。<br><br>「陸人。早安、早安。」它一邊回應，一邊用層層羽翼覆蓋住自己的寶物，接著向空無一人的天空說道，「謝謝佐。」雖然不知道對方聽不聽得見。</dd></dl>
+	<dl class="tc1 nc7"><dt>森 陸人</dt><dd>稚嫩、輕柔、的笑聲都讓森陸人內心鼓動，空氣的波動也似是回應他的心情一樣竟連微弱的氣息都彷彿帶著一股甜味。<br><br>「早安。」又再一次的回應，並隨著淵的動作也往空中看去，心中禱念老院長、剛剛的青年、更之前遇到的存在。<br><br></dd></dl>
+	<dl class="tc1 nc36"><dt>END-A2：以愛為食</dt><dd>世界不斷地輪回——承載著幾百幾千、幾億、數不清的生命。<br>靈魂不斷地轉生——行走於幾百幾千、幾億、數不清的命運之中。<br><br>該如何稱呼在這之中相遇的奇跡、重逢的奇跡呢？<br>雖然種族不同，但是能像這樣再次和你在一起是一件多麼幸福的事情啊。<br>如此的奇跡應銘刻於不斷輪迴的靈魂之中。<br><br><br>我們並非卡拉斯帕。<br>我們無法決定我們命中註定的結局。<br><br>在這無限的世界裡，<br>我害怕的，僅僅是無法和你一起橫渡相同的時光。<br><br><br>TRPG COC | 愛飢ゑヲワル 劇本通關《END-A2：以愛為食 | 愛、食え化ける》<br></dd></dl>
+	<dl class="tc1 nc5"><dt>ＫＰ烏鴉</dt><dd>□報酬<br>姑且算兩人生還<br><br>※按照模組劇情來說兩人的確生還了，但是也相當於某種程度上的Lost了，因為身在幻夢境的PC很難再作為探索者使用。不過，如果有適合的場景便可以再度使用沒有問題。<br></dd></dl>
+	<p class="tc6 tab"><span>結局</span></p>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>END-A1：滿溢著愛的兩人| 愛、埋めるヒト<br><br>你們決定共同在人類社會生活下去。聽到這樣的回答，青年依舊是面無表情。<br>「是嗎。」他這麼說道。<br><br>「那麼，我就將淵的名字從幻夢境的名錄上抹去吧。」<br><br>這麼說著，風便吹了起來，將他手中的書頁吹得七零八落、劈裡啪啦地翻著頁。名錄在某一頁停下了。青年將手放在書上，開始唱起了什麼。<br>那是你們聽不懂的語言。不過，那應該就是為了消除淵的名字而詠唱的詞句吧。<br><br>「以上。即刻起，你就不再是這個世界的居民了——今後，就隨身旁那個人類，去往任何你們想去的地方吧。」<br>「但、是啊......畢竟我也並非惡鬼。我也不希望你們選擇的未來註定是不幸的。」<br>「拿著這個吧。」<br><br>青年擲來的是一塊小小的石頭。明明沒能反射任何光線，卻在黑暗中綻放出斑斕的色彩。那光芒是如此美麗，讓人目眩神迷，是不存於現實中的任何一種材質。<br><br>「讓淵戴著的話，那就只有森 陸人能看到你了。」<br></dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>他轉過身去，用左腳輕輕地點了一下水面。就在這時，周圍的液體好像突然有了意志似的動了起來，將你們包圍。<br><br>「我會祝福你們所擁有的決心。」<br><br>最後，你們的意識在黑暗中漸漸消融。<br><br>從窗戶照射進來的陽光落在房間。<br>你們能夠得知現在已經是早上了。意識逐漸清醒過來，你們一邊揉著惺忪的睡眼一邊起身，這裡是森 陸人的房間。<br><br>目光所及之處的是你的重要之人。<br>你們看向彼此，意識到對方的存在和姿態，確實真切地存在於此。<br><br>（最後的RP）<br><br>世界不斷地輪回——承載著幾百幾千、幾億、數不清的生命。<br>靈魂不斷地轉生——行走於幾百幾千、幾億、數不清的命運之中。<br><br>該如何稱呼在這之中相遇的奇跡、重逢的奇跡呢？<br>雖然種族不同，但是能像這樣再次和你在一起是一件多麼幸福的事情啊。<br>如此的奇跡應銘刻於不斷輪迴的靈魂之中。<br><br>我們並非卡拉斯帕。<br>我們無法決定我們命中註定的結局。<br><br>在這無限的世界裡，<br>我害怕的，僅僅是無法和你一起橫渡相同的時光。<br><br>劇本通關《END-A1：滿溢著愛的兩人 | 愛、埋めるヒト》<br><br><br>□報酬<br>生還 1d10<br>克蘇魯神話 +5%<br>物品：紗之石<br>{HO神話生物}持有紗之石的時候會變得只能被{HO探索者}看到。如果不持有石頭，周圍的人看到也會進行sc。<br>※神話生物的卡如何處理就交給KP和PL商量了。基本上應該是只能參加1v1模組。<br></dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>END-B：不相容的終焉| 相容れぬ終わり<br><br>森 陸人沒有追上去。<br>你只能佇立在原地，看著淵不斷下墜的身影。<br>那是為什麼呢？是因為在害怕墜落之後，那個未知的世界嗎？<br><br>在你做出結論之前，那兩個和善的人們牽上了你的手。<br>「放心吧，只要順利跨越裂縫，就能回到現實世界的。」<br>他們像是要讓你安心、要守護你一般，帶著你跨越裂縫，朝著現實世界走去。你直覺地感到一切正在崩塌——這處被稱為「幻夢境」的世界與現實之間的入口，即將迎來毀滅。<br><br>「我們快走吧。」<br><br>紅髮少年帶著略顯寂寞的表情目送著森 陸人的離開。在視線交會的瞬間，淵的身影也隨之消逝在崖底，而森 陸人也消失在裂縫的另一邊離開了這個世界。<br><br>（最後的RP）<br><br>感受到自己被水浸泡著，淵睜開了眼睛。<br><br>「噗通」<br><br>水滴拍打地面的聲音在黑暗中迴盪。周圍被寂靜和黑暗包圍著。<br><br>「真是可憐啊......畢竟我們和人類是絕對無法相容的存在....」<br>「如此飢渴的愛，是永遠無法獲得滿足的。」<br><br>在朦朧的意識中，雖看不清對方的容貌，但那個人卻憐憫地將你擁入懷中，溫柔地包裹著。<br>那份溫暖，讓人無可奈何地感到難過，你不禁流下了眼淚。<br>即便無法繼續存活，但只要能再次與你相伴，僅僅如此，便已足夠了。<br><br>（最後的RP）<br>■<br>世界不斷地輪回——承載著幾百幾千、幾億、數不清的生命。<br>靈魂不斷地轉生——行走於幾百幾千、幾億、數不清的命運之中。<br><br>我們是卡拉斯帕，我們只能面對命中註定的結局。<br>在無限的世界裡，我們應該恐懼的，是什麼都無法抉擇的愚鈍。<br><br><br>劇本通關《END-B：不相容的終焉 | 相容れぬ終わり》<br><br>□報酬<br>克蘇魯神話 +5%<br>探索者生還，神話生物Lost<br></dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>END-C：被破壞的相容性 | 相容れを割る<br><br>你們作出了其他的決定。聽到這樣的回答，青年依舊是面無表情。<br>「是嗎。」他這麼說道。<br><br>「那麼，我會見證你們的選擇。」<br><br>他轉過身去，用左腳輕輕地點了一下水面。就在這時，周圍的液體好像突然有了意志似的動了起來，將你們包圍。<br><br>「我會祝福你們所擁有的決心。」<br><br>波浪不斷地湧來。慢慢地，水不斷地增多。時間已經不多了，很快，水就會將你們吞噬。<br><br>（最後的RP）<br><br>你們被水吞沒。水泡滴滴答答地漏出來，漸漸地你們失去了意識。<br><br><br>□甦醒<br>陽光照了進來。你們能夠得知現在已經是早上了。意識逐漸清醒過來，你們一邊揉著惺忪的睡眼一邊起身。你們發現這裡是自己的住處。<br>自己的重要之人已經不在身邊了。短暫間感受到的溫暖早已冷卻。<br>■<br>世界不斷地輪回——承載著幾百幾千、幾億、數不清的生命。<br>靈魂不斷地轉生——行走於幾百幾千、幾億、數不清的命運之中。<br><br>我們是卡拉斯帕，我們只能面對命中註定的結局。<br>在無限的世界裡，我們永遠只能面對與重要之人分別的不幸。<br><br>但願下次見面之時，我能毫無畏懼地愛你。<br><br>劇本通關《END-C：被破壞的相容性 | 相容れを割る》<br><br><br>□報酬<br>無<br>※神話生物和探索者的pc卡從此以後都無法使用，實際上也等於Lost了。但是從模組的劇情來看確是兩個人都生還。(KP桌特裁，雙方算活著)<br></dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>■雜談<br>當初是因為「好想跟神話生物談戀愛啊！」才寫下這個故事。 就算這違背了克蘇魯神話的本意也無所謂，因為在這裡，我就是神…… 只要大家能玩得開心、看得盡興，我就心滿意足了。 請盡情享受各位最喜歡的「異種之戀」吧。<br></dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>■背景故事<br>HO探索者在出生不久的時候，曾在幻夢境中與HO神話生物相遇。<br>那時候有著何種接觸可以交由兩人來決定，不過就是以此為契機，ho神話生物開始對人類感興趣。<br>時光流逝的現代，兩個人在見飢山重逢。<br><br>HO探索者掉進見飢山的谷底時，平時一直關照HO神話生物的「洛本」察覺到了危機，並將兩人引導到了異次元。正確來說，洛本是為了從追殺ho神話生物的「其他探索者」手中保護兩人，才將兩人撤到了異次元。而洛本為了趕走那些「其他探索者」，返回了現實的見飢山。故事就從兩個人醒來之後開始。<br><br><br>由於「探索者」們的「善意」，異次元即將迎來崩潰。在那之前，管理著幻夢境各種各樣的生命的神「佐·卡拉爾」準備切斷現實和異次元的連接以避免災害。到那時，兩個人究竟會如何選擇呢。<br>享受異種交際的弊端和純愛，彼此同情，這便是樂趣所在吧。<br></dd></dl>
+	<p class="tc0 tab"><span>雑談</span></p>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>1d6 (1D6) ＞ 2</dd></dl>
+	<dl class="tc0 nc7"><dt>森 陸人</dt><dd>1d24 (1D24) ＞ 2</dd></dl>
+	<p class="tc6 tab"><span>結局</span></p>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>■NPC介紹<br>▽NPC1：洛本（Lobon）<br>某段時間，洛本和他的兄弟塔瑪什還有佐·卡拉爾被廣泛崇拜。隨著薩爾納斯的陷落，對他的信仰也逐漸衰退。但是他仍然和餘下的少數信徒一起，參與幻夢境與探索者的世界。他並不喜歡鬥爭，但是他不喜歡任何人侵犯他的領地。<br></dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>* 洛本(Lobon)-薩爾納斯之神，形象為一為身穿白袍，頭戴桂冠的人類男性，手持一柄長矛。<br>https://baike.baidu.hk/item/%E5%A4%A2%E5%A2%83%E8%AB%B8%E7%A5%9E/56522860</dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>▽NPC2：佐·卡拉爾（Zo-Kalar）<br>他曾經是薩爾納斯城的主神，被稱為生與死的神。據說他管理著地球的幻夢境中所有人的言行錄。自薩爾納斯陷落以來，他已經很少受到崇拜，但是他的力量仍然健在。</dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>* 佐·卡拉爾(Zo-Kalar)-誕生與死亡之神，洛本的兄弟，形象與洛本相似。<br><br>夢境諸神<br><br>“佐-卡拉爾被認為是出生與死亡之神。”<br><br>——桑迪彼得森《幻夢境生物野外指引》<br><br>佐-卡拉爾曾是薩爾納斯（Sarnath，幻夢境中最古老的一片地區米納爾的一個城邦）的領袖神，領導塔馬什和洛本。他又高又瘦。皮膚和頭髮都是骨白色的，但他的眼睛是純黑色的。他穿著一件黑緞子的長袍。<br><br>教團：佐-卡拉爾被認為是生死之神，掌管地球幻夢境所有居民的生命歷史。自從薩爾納斯覆滅以來，他幾乎沒有被崇拜。<br><br>其他特色：佐-卡拉爾非常憂鬱，很少歡迎人類的陪伴。他旅行時總是帶著一個或多個幽影（Shades）。他對凡人很忌諱，除非絕對必要否則會遠離他們。他可以回答關於凡人未來的問題，但僅限於與凡人的死亡有關。他只是勉強給出這些答案，並為此付出了可怕的代價。<br><br>變形：佐-卡拉爾可以用他的MP與視線內任何一個敵人的MP相對抗。若戰勝該敵人，他可以透過消耗等同於敵人POW的MP，強行將其變成幽影。<br><br>佐-卡拉爾，生命與死亡的統治者（Zo-Kalar，Ruler of Life and Death）<br><br>力量50<br><br>體質40<br><br>體型20<br><br>智力20<br><br>意志25<br><br>敏捷20<br><br>移動12<br><br>外貌 8<br><br>耐久30<br><br>傷害加權： +3D6<br><br>武器：觸摸95%，減少目標1D6點POW<br><br>護甲：根據意願，他能引發神聖不可侵犯性，保護他10點護甲<br><br>咒文：消耗1點MP可以召喚一個幽影；總能命令在場的所有幽影。佐-卡拉爾知曉所有同類夢境諸神與奈亞拉托提普的接觸咒文<br><br>理智喪失：無</dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>▽NPC3：塔瑪什（Tamash）<br>和佐·卡拉爾與洛本一樣，塔瑪什的教團在薩爾納斯陷落之後也消失了蹤跡。但是，他作為魔術師們的後援者，仍經常被崇拜。<br>塔瑪什是幻術的達人。他可以用幻影填滿並維持總共約4立方公里的空間。<br><br>* 塔馬什(Tamash)-洛本的兄弟，形象為有着銀色皮膚的男子。</dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>※薩爾納斯 Sarnath<br>據說這是名為幻夢境的大陸中曾經存在的巨大都市。<br><br>已經滅亡了<br>https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%AB%E3%83%8A%E3%82%B9%E3%81%AE%E6%BB%85%E4%BA%A1<br><br>https://en.wikipedia.org/wiki/The_Doom_That_Came_to_Sarnath</dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>▽NPC4：探索者A<br>被委託來消滅見飢山中出現的怪物（也就是ho神話生物）。在進行搜索時，他注意到ho探索者在這座山上失蹤並且見飢山與被稱為「異次元」的幻夢境相連，於是他為了拯救ho探索者而行動。<br>在模組的最後，他成功與ho探索者所在的幻夢境接觸，並判斷該場所十分危險，試圖破壞並封鎖入口。<br><br>▽NPC5：探索者B<br>同上。但是，他們的行為不應該被責備。因為他們也只是在事物的側面尋求正義的探索者罷了。<br></dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>▼和塔瑪什的對話<br>→洛本是誰？<br>「洛本就是把你們帶到這裡的孩子噢。」<br>→他為什麼要把我們帶來這裡？<br>「嗯……誰知道呢？他肯定有他的理由吧。」<br>→這裡是哪兒？<br>「這裡是一個被稱為幻夢境的地方噢。」<br>→幻夢境又是什麼？<br>「嗯……怎麼說呢。姑且可以認為是夢的世界吧——不，應該稱這裡為夢與現實的夾縫。」<br>→怎樣才能離開？<br>「嗯……誰知道呢？」<br>→你是誰？<br>「我的名字是塔瑪什。」<br>→你在幹什麼？<br>「我在等你們噢。我很好奇洛本帶來的孩子究竟是什麼樣的人。」<br>→你知道烏鴉嗎？<br>「烏鴉？啊啊、我認識喔。他們也是幻夢境的住民呢。」<br>→你知道那個在黑暗中拿著燈的人類嗎？<br>「噢噢，那大概是同樣來到這個山谷的人類吧。他應該是想把森 陸人從這裡救出去吧。」<br></dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>## 《卡拉斯帕的末路：永恆的鎖鏈》<br>阿佛戈蒙的神官卡拉斯帕，因愛侶貝爾托莉絲的猝逝而陷入絕望，進而對自己所侍奉的時間之神發出詛咒。即便最愛的女人已然逝去，神靈卻不曾垂憐，唯有時間依舊冷酷無情地流轉。卡拉斯帕轉而求助於妖術師阿托莫克斯，企圖舉行禁忌的儀式。阿托莫克斯雖勸誡此舉是對阿佛戈蒙的褻瀆，且即便成事，也僅能喚回那一瞬的「一小時」，而非完整的愛；然而，眼見卡拉斯帕決心已定，妖術師最終只能無奈妥協。於是，卡拉斯帕玷汙了阿佛戈蒙的祭壇，奉獻自己的鮮血，向魔神克塞克薩諾斯吟誦咒文，祈願換回那與貝爾托莉絲共度的一小時。<br><br>時光重演，回溯到了去年秋天的那一小時。卡拉斯帕眼前，是重獲生機的貝爾托莉絲。他滿心歡喜地獻上鮮花，正當兩人耽溺於愛意時，一隻斷了翅的蛾忽然墜落。慈悲的貝爾托莉絲離開了他的懷抱，拾起那隻蛾，在發現牠再也無法振翅後，便陷入了無盡的哀慟，對卡拉斯帕的撫慰置若罔聞。卡拉斯帕對此感到焦躁難耐，那被召喚回來的短暫一小時竟變得如此虛無荒謬，他在經歷了雙重的喪失感後，被拽回了原本的時空。<br><br>因卡拉斯帕僭越禁忌，不僅是他，連赫斯坦行星上的所有生靈都被迫重新經歷了去年秋天的那一小時。眾人皆驚愕不已，無法理解這異象背後的意義。由於卡拉斯帕所引發的時空偏誤，世界的理法徹底崩毀。時序陷入了極度的混亂，卡魯德的百姓深信這是阿佛戈蒙的震怒，毀滅之日已近在眼前，狂氣與混沌蔓延全城，連阿托莫克斯也暴斃身亡。不久後，眾神官到來，將這名大罪人卡拉斯帕投入地牢。<br><br>在審判之中，大祭司赫爾佩諾（Helpenor）令神明「阿佛戈蒙」降靈附身，宣讀處刑的判決：其所有轉生體，都將在人生半途迎來與卡拉斯帕（Kalaspa）相同的死局，且注定背負被周遭眾人迅速遺忘的宿命。<br><br>卡拉斯帕被特殊的鎖鏈重重束縛，被迫跌坐在據傳為阿佛戈蒙靈魂棲息的深淵邊緣。此刻，「我」——也就是米爾沃普（Milwarp）的意識，已與卡拉斯帕合而為一。我隱約感覺到，在另一個世界裡，有一名亡靈正記錄著我的遺言，但我卻無論如何也想不起他的名字。<br><br>不久後，深淵之中透出了詭譎的光芒——；在遙遠的時間彼方，阿佛戈蒙的鎖鏈因白熱化而灼燒、折磨著米爾沃普，終將他們從時間長河中徹底抹殺。</dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B4%E3%83%A2%E3%83%B3%E3%81%AE%E9%8E%96#%E3%83%9F%E3%83%AB%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%97%E3%81%AE%E6%97%A5%E8%A8%98%EF%BC%88%E3%82%AB%E3%83%A9%E3%82%B9%E3%83%91%EF%BC%89</dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>■角色及HO<br>【ho1：探索者】<br>舊卡限定。年齡和性別都沒問題。<br>你曾經遭遇過世上存在的褻瀆性怪異。某日，因為某種原因你造訪了名為見飢山的地方。<br>*在這之後會被賦予作為模組「探索者」的設定。<br><br>【ho2：神話生物】<br>新卡限定。容貌無論怎樣都ok。<br>你是被稱為神話生物的褻瀆性的存在。因為對人類有興趣，所以你一直潛伏在被稱為「見飢山」的山上。<br>*基本上這張卡只能在這個劇本裡使用。<br>*另外，關於角色創建有以下注意事項：<br>→神話生物的種族可以從規則書或怪物之錘中選擇要作為原型的神話生物。當然原創種族也是沒有問題的。<br>→外貌和能力值在這裡並不重要，所以可以隨喜好來設置。<br>→sancheck的數值可以自己設定。但是即死設定（1d100）請慎重考慮。可以和kp一起商量，避免遊戲進行不下去。<br>→請以「對人類感興趣」為大前提，性格不要那麼有攻擊性。<br>→關於平日的生活方式可以自行設定，但請確保不會對人造成嚴重危害，避免引發事件。<br>→住在山中的時間已經長到記不清了，但你記得自己是因為對人類抱有興趣才住進山中的。<br></dd></dl>
+	<dl class="tc6 nc5"><dt>ＫＰ烏鴉</dt><dd>▼給HO探索者的秘密情報<br>因為你曾經是異形，所以你清楚這一點——若是在人類社會生活，那一定會十分艱辛。淵會因為外表和其他人不一樣而被害怕，或許也會受到暴力的對待吧。今後，作為與他一起生活的人，你該怎樣才能排解他只能依靠自己的寂寞呢？<br>不安感化為絲線，今後也將永恆不斷地編織吧。<br>所以那個時候，你們才會選擇了離別也說不定。<br><br>但是，即便如此，想要在他身邊的心情是不會說謊的。如果輕易地放棄當時盼望已久的夢想的話，肯定會後悔的。<br><br>如何選擇，這是你的自由。<br><br>▼給HO神話生物的秘密情報<br>因為你曾經是人類，所以你清楚這一點——若是在幻夢境生活，那一定會十分艱辛。森 陸人會因為外表和其他人不一樣而被害怕，或許也會受到暴力的對待吧。今後，作為與他一起生活的人，你該怎樣才能排解他只能依靠自己的寂寞呢？<br>不安感化為絲線，今後也將永恆不斷地編織吧。<br>所以那個時候，你們才會選擇了離別也說不定。<br><br>但是，即便如此，想要在他身邊的心情是不會說謊的。如果輕易地放棄當時盼望已久的夢想的話，肯定會後悔的。<br><br>如何選擇，這是你的自由。<br></dd></dl>
+
+</section>
+</main>
+<footer><a href="https://box.tetronomo.com/ccfc/" target="_blank">CCFOLIAログコンバータ Ver1.30</a></footer>
+<script type="text/javascript">
+const tab = [];
+const name = [];
+const trigger = document.querySelectorAll(".select_t");
+trigger.forEach(function(target) {
+	target.addEventListener('change', function() {
+		const classname = target.id;
+		const id = classname.split("tc");
+		tab[id[1]] = target.checked ? '' : 'none';
+		const tid = tab[id[1]];
+		const arr = document.querySelectorAll("." + classname);
+		arr.forEach(function(value) {
+			const string = value.className;
+			let temp = "";
+			let nid = "";
+			if(string.match('nc')) {
+				temp = string.split("nc");
+				nid = temp[1].substring(0,1);
+			}
+			if(tid == 'none') {
+				value.style.display = 'none';
+			} else {
+				if(name[nid] == 'none') {
+					value.style.display = 'none';
+				} else {
+					value.style.display = '';
+				}
+			}
+		});
+	});
+});
+const triggern = document.querySelectorAll(".select_n");
+triggern.forEach(function(target) {
+	target.addEventListener('change', function() {
+		const classname = target.id;
+		const id = classname.split("nc");
+		name[id[1]] = target.checked ? '' : 'none';
+		const nid = name[id[1]];
+		const arr = document.querySelectorAll("." + classname);
+		arr.forEach(function(value) {
+			const string = value.className;
+			const temp = string.split("tc");
+			const tid = temp[1].substring(0,1);
+			if(tab[tid] == 'none') {
+				value.style.display = 'none';
+			} else {
+				if(nid == 'none') {
+					value.style.display = 'none';
+				} else {
+					value.style.display = '';
+				}
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>
